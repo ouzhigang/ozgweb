@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="{$js_jquery}"></script>
+<script type="text/javascript" src="../js/TreeSelector.js"></script>
+<script type="text/javascript" src="../js/utility.js"></script>
+{literal}
+<script type="text/javascript">
+	$(function(){
+		CKEDITOR.replace('content');
+		
+		{/literal}{$get_tree_selector}{literal}
+	
+		var ts = new TreeSelector(document.getElementById("dataclass_id"),data,0); 
+		ts.createTree(); 	
+		
+		if(getUrlParam('dataclass_id')!=null){
+			document.getElementById("dataclass_id").value=getUrlParam('dataclass_id');
+		}
+	});
+</script>
+{/literal}
+</head>
+
+<body>
+<form name="form1" method="post" action="?act=add">
+<table class="tableBorder" cellSpacing="0" cellPadding="0" width="600" border="0">
+  <tr>
+    <th class="tableHeaderText">文章管理</th>
+  </tr>
+  <tr>
+    <td>
+	  &nbsp;&nbsp;标题: <input name="name" type="text" value="{$row.name}" style="width:200px" />
+	</td>
+  </tr>
+  <tr>
+    <td>
+	  &nbsp;&nbsp;排序: <input name="sort" id="sort" type="text" value="{$row.sort}" style="width:200px" onKeyUp="if(isNaN(value))execCommand('undo')" />
+	</td>
+  </tr>
+  <tr>
+    <td>
+	  &nbsp;&nbsp;分类:
+	  <select id="dataclass_id" name="dataclass_id" style="width:200px">
+      </select> 
+
+	</td>
+  </tr>  
+  <tr>
+    <td>
+	  &nbsp;&nbsp;图片:
+	  <input type="text" value="{$row.picture}" id="picture" name="picture" style="width:200px" /> 
+      <input type="button" onClick="open('upload.php?id=picture&name=main','','width=300,height=100');" value="上传" />
+	</td>
+  </tr> 
+  <tr>
+    <td>
+	  <textarea name="content" id="content">
+      	{$row.content}
+      </textarea>
+	</td>
+  </tr>  
+  <tr align="center">
+    <td>
+      <input type="hidden" name="id" value='{$id}' />
+      <input type="hidden" name="type" value='{$type}' />
+	  <input name="提交" type="submit" value="提交" /> 
+      <input value="后退" type="button" onClick="history.back()" />
+	</td>
+  </tr>
+</table>
+</form>
+<div align="center">
+<br />
+{$spent}
+</div>
+</body>
+</html>

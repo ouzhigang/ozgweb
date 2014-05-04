@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link href="../css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/TreeSelector.js"></script>
+<script type="text/javascript" src="{$js_jquery}"></script>
+<script type="text/javascript" src="../js/utility.js"></script>
+<script type="text/javascript" src="../js/expand/Array.js"></script>
+{literal}
+<script type="text/javascript">
+$(function(){
+	{/literal}{$get_tree_selector}{literal}
+	
+	if(getUrlParam('parent_id') != null){
+		//编辑状态的话则删除自身的ID
+		for(var i = 0 ; i < data.length ; i++){
+			if(getUrlParam('parent_id') == data[i].pid){
+				data.removeAt(i);
+			}
+		}	
+	}
+	
+	var ts = new TreeSelector(document.getElementById("parent_id"),data,0); 
+	ts.createTree(); 	
+	
+	if(getUrlParam('parent_id') != null){
+		document.getElementById("parent_id").value = getUrlParam('parent_id');
+	}
+});
+</script>
+{/literal}
+</head>
+
+<body>
+<form name="form1" method="post" action="?act=add">
+<table class="tableBorder" cellSpacing="0" cellPadding="0" width="550" border="0">
+  <tr>
+    <th colspan="2" class="tableHeaderText">分类 {$row.parent_name}</th>
+  </tr>
+  <tr>
+    <td align="center">分类名称:</td>
+    <td>
+	  <input name="name" type="text" style="width:200px" value="{$row.name}" />
+	</td>
+  </tr>
+  <tr>
+    <td align="center">分类排序:</td>
+    <td>
+	  <input name="sort" type="text" style="width:200px" value="{$row.sort}" onKeyUp="if(isNaN(value))execCommand('undo')" />
+	</td>
+  </tr>
+  <tr>
+    <td align="center">父级分类:</td>
+    <td>
+	  <select id="parent_id" name="parent_id" style="width:200px">
+      	<option value="0">最顶级...</option>
+      </select> 
+	</td>
+  </tr>
+  <tr align="center">
+    <td colspan="2">
+      <input type="hidden" name="id" value='{$id}' />
+      <input type="hidden" name="type" value='{$type}' />
+	  <input name="提交" type="submit" value="提交" /> 
+	  <input value="后退" type="button" onClick="history.back()" />
+	</td>
+  </tr>
+</table>
+</form>
+<div align="center">
+<br />
+{$spent}
+</div>
+</body>
+</html>
