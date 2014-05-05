@@ -10,6 +10,4 @@ define("WEB_NAME", "ozgweb");
 define("WEB_CHARSET", "utf-8");
 
 //外链js部分
-
 define("JS_JQUERY", "http://code.jquery.com/jquery-2.1.0.min.js");
-
