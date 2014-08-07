@@ -14,8 +14,9 @@ $curr_file_name = strtolower(self());
 
 $runtime = new runtime();
 
-$db = new ezSQL_pdo(constant("PDO_CONNECT"));
-//$db->query("SET NAMES " . constant("WEB_CHARSET"));
+$db = new ezSQL_pdo($db_cfg["connect"], $db_cfg["user"], $db_cfg["pwd"]);
+if(strpos($db_cfg["connect"], "mysql") !== false)
+	$db->query("SET NAMES " . constant("WEB_CHARSET"));
 
 define("SMARTY_PATH", "../smarty/");
 

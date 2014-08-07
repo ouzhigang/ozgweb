@@ -10,4 +10,6 @@ ckeditor需要自行下载，然后放到/ozgweb/ckeditor/，在/ozgweb/ckeditor
 
 ================
 
-数据库使用sqlite3，路径为/ozgweb/ozgweb.php
+默认使用的数据库为sqlite3，路径为/ozgweb/ozgweb.php
+
+修改config.php的对应位置可改为mysql
