@@ -17,9 +17,9 @@ if($act == "show") {
 	
 	$wq = "type = " . $type;
 	$wq_list = "d.type = " . $type;
-	$p->query = "type=" . $type;
+	$page->query = "type=" . $type;
 	if($dataclass_id) {
-		$p->query .= "&dataclass_id=" . $dataclass_id;		
+		$page->query .= "&dataclass_id=" . $dataclass_id;		
 		
 		get_children_id($dataclass_id);
 		$children_id = implode(",", $children_id);
@@ -27,15 +27,15 @@ if($act == "show") {
 		$wq_list .= " and d.dataclass_id in(" . $children_id . ")";
 	}	
 	if($keywords) {
-		$p->query .= "&keywords=" . urlencode($keywords);
+		$page->query .= "&keywords=" . urlencode($keywords);
 		$wq .= " and name like '%" . $keywords . "%'";
 		$wq_list .= " and d.name like '%" . $keywords . "%'";
 	}
 	
-	$p->pageSize = 30;
+	$page->pageSize = 30;
 	$sql = SqlText::func("count", "id", $table, $wq);	
 	$recordCount = $db->get_var($sql);
-	$p->recordCount = $recordCount;
+	$page->recordCount = $recordCount;
 	
 	$sql = "select d.* , dc.id as dc_id , dc.name as dc_name from {$table} as d inner join {$table2} as dc on d.dataclass_id = dc.id where " . $wq_list . " order by d.sort desc , d.id desc limit " . SqlText::getStartIndex($page->pageIndex(), $page->pageSize) . " , " . $page->pageSize;
 	$data = $db->get_results($sql, ARRAY_A);
