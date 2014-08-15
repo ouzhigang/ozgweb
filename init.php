@@ -21,7 +21,7 @@ if(strpos($db_cfg["connect"], "mysql") !== false)
 define("SMARTY_PATH", "smarty/");
 
 $smarty = new Smarty();
-$smarty->template_dir = constant("WEB_PATH") . "html/";
+$smarty->template_dir = "html/";
 $smarty->compile_dir = constant("SMARTY_PATH") . "templates_c/";
 $smarty->config_dir = constant("SMARTY_PATH") . "configs/";
 $smarty->cache_dir = constant("SMARTY_PATH") . "cache/";
@@ -33,7 +33,7 @@ $page->prevText = "上一页";
 $page->nextText = "下一页";
 $page->lastText = "末页";
 
-header("Content-Type:text/html; charset=" . constant("WEB_CHARSET"));
+//header("Content-Type:text/html; charset=" . constant("WEB_CHARSET"));
 
 $novalid = array();
 $novalid[] = "admin_articlesingle.php";
