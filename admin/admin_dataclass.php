@@ -1,30 +1,27 @@
 <?php
 require('init.php');
-require('../comm_bll/share.php');
+require_once('../comm_bll/share.php');
 
-$act = $_GET["act"] ?  $_GET["act"] : "show";
+$act = isset($_REQUEST["act"]) ?  $_REQUEST["act"] : "list";
 
-$table = constant('DB_PREFIX') . "dataclass";
-
-if($act == "show") {
-	$runtime->start();
+if($act == "list") {
+	/*$runtime->start();
 	
-	$smarty->assign("jquery_tree_table", get_jquery_tree_table(intval($_GET["type"])));
+	$smarty->assign("jquery_tree_table", get_jquery_tree_table(intval($_REQUEST["type"])));
 	
 	$runtime->stop();
-	$smarty->assign('spent', "页面执行时间: " . $runtime->spent() . " 毫秒");
-	$smarty->assign('js_jquery', constant("JS_JQUERY"));
+	$smarty->assign('spent', "页面执行时间: " . $runtime->spent() . " 毫秒");*/
 	$smarty->display('admin/admin_dataclass_list.html');
 }
 elseif($act == "add") {
-	if($_POST) {
-		$list["name"] = str_filter($_POST["name"]);
-		$list["sort"] = intval($_POST["sort"]);	
-		$list["parent_id"] = intval($_POST["parent_id"]);	
+	/*if($_REQUEST) {
+		$list["name"] = str_filter($_REQUEST["name"]);
+		$list["sort"] = intval($_REQUEST["sort"]);	
+		$list["parent_id"] = intval($_REQUEST["parent_id"]);	
 		$list["depth"] = 0;	
 		$list["root_id"] = 0;
-		$list["type"] = intval($_POST['type']);	
-		$id = intval($_POST["id"]);
+		$list["type"] = intval($_REQUEST['type']);	
+		$id = intval($_REQUEST["id"]);
 		if($id) {			
 			$sql = SqlText::update($table, $list, "id = {$id}");	
 			$db->query($sql);
@@ -39,7 +36,7 @@ elseif($act == "add") {
 	
 	$runtime->start();
 	
-	$id = intval($_GET["id"]);
+	$id = intval($_REQUEST["id"]);
 	if($id) {
 		$smarty->assign("id", $id);
 		$sql = "select * from {$table} where id = {$id}";
@@ -51,18 +48,18 @@ elseif($act == "add") {
 		);	
 	}
 	
-	$smarty->assign("type", $_GET["type"]);
+	$smarty->assign("type", $_REQUEST["type"]);
 	$smarty->assign("row", $row);
-	$smarty->assign("get_tree_selector", get_tree_selector(intval($_GET["type"])));
+	$smarty->assign("get_tree_selector", get_tree_selector(intval($_REQUEST["type"])));
 	
 	$runtime->stop();
 	$smarty->assign('spent', "页面执行时间: " . $runtime->spent() . " 毫秒");
-	$smarty->assign('js_jquery', constant("JS_JQUERY"));
+	$smarty->assign('js_jquery', constant("JS_JQUERY"));*/
 	$smarty->display('admin/admin_dataclass_add.html');	
 }
 elseif($act == "del") {
-	do_del(intval($_GET['id']));
-	msg_box("删除成功", "admin_dataclass.php?type=" . $_GET['type']);		
+	//do_del(intval($_REQUEST['id']));
+	//msg_box("删除成功", "admin_dataclass.php?type=" . $_REQUEST['type']);		
 }
 else
 	exit("错误请求");	

@@ -4,17 +4,17 @@ require('init.php');
 $act = isset($_REQUEST["act"]) ?  $_REQUEST["act"] : "list";
 
 if($act == "list") {
-	$runtime->start();
+	/*$runtime->start();
 	
-	$sql = "select * from friendlink order by sort desc, id desc";
+	$sql = "select * from friendlink order by sort desc , id desc";
 	$data = $db->get_results($sql, ARRAY_A);
 	$smarty->assign('data', $data);
 	
 	$smarty->assign('self', self());
 	
 	$runtime->stop();
-	$smarty->assign('spent', "页面执行时间: " . $runtime->spent() . " 毫秒");
-	$smarty->display('admin/admin_friendlink_list.html');
+	$smarty->assign('spent', "页面执行时间: " . $runtime->spent() . " 毫秒");*/
+	$smarty->display('admin/admin_feedback_list.html');
 }
 elseif($act == "add") {	
 	/*if($_REQUEST) {

@@ -1,13 +1,11 @@
 <?php
 require('init.php');
 
-$act = $_GET["act"] ?  $_GET["act"] : "show";
+$act = isset($_REQUEST["act"]) ?  $_REQUEST["act"] : "list";
 
-if($act == "show") {
+if($act == "list") {
 	$runtime->start();
-	$table = constant('DB_PREFIX') . "admin";
-	$order = "id asc";
-	$sql = "select * from " . $table . " order by " . $order;
+	$sql = "select * from user order by id asc";
 	$data = $db->get_results($sql, ARRAY_A);
 	$smarty->assign('data', $data);
 	$runtime->stop();
@@ -15,10 +13,10 @@ if($act == "show") {
 	$smarty->display('admin/admin_admin_list.html');
 }
 elseif($act == "add") {
-	if($_POST) {
-		$name = str_filter($_POST["name"]);
-		$pwd = str_filter($_POST["pwd"]);
-		$pwd2 = str_filter($_POST["pwd2"]);
+	/*if($_REQUEST) {
+		$name = str_filter($_REQUEST["name"]);
+		$pwd = str_filter($_REQUEST["pwd"]);
+		$pwd2 = str_filter($_REQUEST["pwd2"]);
 		if($pwd == $pwd2) {
 			$table = constant('DB_PREFIX') . "admin";
 			$result = $db->get_var("select count(id) from " . $table . " where name='" . $name . "'");
@@ -36,28 +34,28 @@ elseif($act == "add") {
 		else {
 			msg_box("第二次输入密码不正确");
 		}
-	}
+	}*/
 	
 	$smarty->display('admin/admin_admin_add.html');
 }
 elseif($act == "del") {
-	$id = intval($_GET["id"]);
+	/*$id = intval($_REQUEST["id"]);
 	if($id == $_SESSION["admin_id"]) {
 		msg_box("不能删除自己");
 	}
 	else {
 		$table = constant('DB_PREFIX') . "admin";
-		$where = "id=" . $_GET["id"];
+		$where = "id=" . $_REQUEST["id"];
 		$sql = SqlText::delete($table, $where);
 		$db->query($sql);
 		msg_box("删除成功", "admin_admin.php");	
-	}
+	}*/
 }
 elseif($act == "pwd") {
-	if($_POST) {
-		$old = str_filter($_POST["old"]);
-		$pwd = str_filter($_POST["pwd"]);
-		$pwd2 = str_filter($_POST["pwd2"]);		
+	/*if($_REQUEST) {
+		$old = str_filter($_REQUEST["old"]);
+		$pwd = str_filter($_REQUEST["pwd"]);
+		$pwd2 = str_filter($_REQUEST["pwd2"]);		
 			
 		if($pwd == $pwd2) {		
 			$table = constant('DB_PREFIX') . "admin";
@@ -76,7 +74,7 @@ elseif($act == "pwd") {
 		else {
 			msg_box("第二次输入密码不正确");
 		}	
-	}
+	}*/
 	
 	$smarty->display('admin/admin_admin_pwd.html');
 }

@@ -1,0 +1,17 @@
+
+#main_form table {
+	width: 50%;
+	
+}
+
+#main_form table td {
+	width: 20%;
+	height: 45px;
+	text-align: right;
+	padding-right: 40px;
+}
+
+.btn_submit_div {
+	padding-top: 20px;
+	padding-right: 150px;
+}

@@ -7,9 +7,3 @@ ckeditor需要自行下载，然后放到/ozgweb/ckeditor/，在/ozgweb/ckeditor
 ================
 
 后台路径是/ozgweb/admin，用户密码都是admin
-
-================
-
-默认使用的数据库为sqlite3，路径为/ozgweb/ozgweb.php
-
-修改config.php的对应位置可改为mysql

@@ -1,22 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{$web_name} - 后台管理系统</title>
-    {literal}
-<STYLE type='text/css'>BODY {
-	SCROLLBAR-FACE-COLOR: #dee3e7; FONT-SIZE: 12px; MARGIN: 0px; SCROLLBAR-HIGHLIGHT-COLOR: #ffffff; SCROLLBAR-SHADOW-COLOR: #dee3e7; SCROLLBAR-3DLIGHT-COLOR: #d1d7dc; SCROLLBAR-ARROW-COLOR: #006699; SCROLLBAR-TRACK-COLOR: #efefef; FONT-FAMILY: "宋体", "Verdana", "Arial", "Helvetica", "sans-serif"; SCROLLBAR-DARKSHADOW-COLOR: #98aab1; BACKGROUND-COLOR: #799ae1
-}
-</STYLE>
-{/literal}
+	{include file="admin/_header.html"}
+	
+	<link href="../resources/css/{WEBPATH_ADMIN}/admin_index.css" rel="stylesheet" type="text/css" />
 </head>
-<frameset rows="*" cols="210,*" frameborder="no" border="0" framespacing="0">
-  <frame src="admin_left.php" name="left" scrolling="Auto" noresize="noresize" id="left" title="left" />
-  <frameset rows="30,*" cols="*" framespacing="0" frameborder="no" border="0">
-    <frame src="admin_top.php" name="top" scrolling="No" noresize="noresize" id="top" title="top" />
-    <frame src="admin_main.php" name="main" id="main" title="main" />
-  </frameset>
-</frameset>
-<noframes><body>
+
+<body>
+    <div id="wrapper">
+		{include file="admin/_dialog.html"}
+		
+        <!-- Navigation -->        
+		{include file="admin/_admin_navbar.html"}
+
+        <div id="page-wrapper">
+            <!-- 内容部分 -->
+			
+			<div class="row" id="first_row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">主机探针</div>
+                        <div class="panel-body">
+                            
+							<table id="viewtable">
+								<tr>
+									<td class="viewtable_title">服务器（IP）</td>
+									<td>{$server_name}（{$get_ip}）</td>
+								</tr>								
+								<tr>
+									<td class="viewtable_title">操作系统</td>
+									<td>{$os}</td>
+								</tr>
+								<tr>
+									<td class="viewtable_title">服务器软件</td>
+									<td>{$server_software}</td>
+								</tr>
+								<tr>
+									<td class="viewtable_title">PHP版本</td>
+									<td>{$php_version}</td>
+								</tr>
+								<tr>
+									<td class="viewtable_title">上传文件大小</td>
+									<td>{$upload_file_status}</td>
+								</tr>
+								<tr>
+									<td class="viewtable_title">脚本超时</td>
+									<td>{$max_execution_time} 秒</td>
+								</tr>
+								<tr>
+									<td class="viewtable_title">网站路径</td>
+									<td>{$document_root}</td>
+								</tr>
+								<tr>
+									<td class="viewtable_title">服务器时间</td>
+									<td>{$now}</td>
+								</tr>
+							</table>
+							
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-4 -->
+                				
+            </div>
+			
+			<!-- 页面执行时间 -->
+			<div class="row" id="spent_row">
+				{$spent}
+			</div>
+			
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+	
+	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_index"></script>
+	
 </body>
-</noframes></html>
+
+</html>
