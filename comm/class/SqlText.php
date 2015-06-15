@@ -204,6 +204,10 @@ class SqlText {
 	//$table(string)为目标表
 	//$dataList(array)
 	static function insert($table, $dataList) {
+		
+		$Key = "";
+		$Value = "";
+		
 		$i = 0;
 		foreach($dataList as $key => $value) {
 			if(is_string($value)) {
@@ -232,6 +236,7 @@ class SqlText {
 	//$where(string)为查询条件
 	static function update($table, $dataList, $where) {
 		$i = 0;
+		$strList = "";
 		foreach($dataList as $key => $value) {
 			if(is_string($value)) {
 				$val = "'" . $value . "'";
@@ -239,8 +244,7 @@ class SqlText {
 			else {
 				$val = $value;
 			}
-			
-			$strList = "";
+						
 			if($i != count($dataList) - 1) {
 				$strList .= $key . " = " . $val . ", ";
 			}

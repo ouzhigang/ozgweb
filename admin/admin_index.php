@@ -4,7 +4,6 @@ require("init.php");
 $act = isset($_REQUEST["act"]) ?  $_REQUEST["act"] : "default";
 
 if($act == "default") {
-	$runtime->start();
 	$smarty->assign('server_name', $_SERVER["SERVER_NAME"]);
 	$smarty->assign('get_ip', get_ip());
 	$smarty->assign('os', PHP_OS);
@@ -14,9 +13,6 @@ if($act == "default") {
 	$smarty->assign('max_execution_time', get_cfg_var("max_execution_time"));
 	$smarty->assign('document_root', $_SERVER["DOCUMENT_ROOT"]);
 	$smarty->assign('now', date("Y-m-d H:i:s"));
-
-	$runtime->stop();
-	$smarty->assign('spent', "页面执行时间: " . $runtime->spent() . " 毫秒");
 
 	$smarty->display('admin/admin_index.html');
 }

@@ -9,7 +9,7 @@
     <!-- DataTables Responsive CSS -->
     <link href="../resources/{SB_ADMIN_2_PATH}/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet" />
 	
-	<link href="../resources/css/{WEBPATH_ADMIN}/admin_admin_pwd.css" rel="stylesheet" type="text/css" />
+	<link href="../resources/css/{WEBPATH_ADMIN}/admin_friendlink_list.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -25,7 +25,10 @@
 			<div class="row" id="first_row">
                 <div class="col-lg-10">
                     <div class="panel panel-default">
-                        <div class="panel-heading">友情链接</div>
+                        <div class="panel-heading">
+							友情链接列表 
+							<button class="btn btn-outline btn-default" type="button" id="btnadd">添加</button>
+						</div>
                         <div class="panel-body">
 							
 							<div class="table-responsive">
@@ -40,24 +43,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+										{foreach from=$data item=v}
                                         <tr>
                                             <td>
-												<h5>1</h5>
+												<h5>{$v.id}</h5>
 											</td>
                                             <td>
-												<h5>测试</h5>
+												<h5>{$v.name}</h5>
 											</td>
                                             <td>
-												<h5>http://baidu.com</h5>
+												<h5>{$v.url}</h5>
 											</td>
 											<td>
+												{if $v.is_picture}
 												<img src="https://www.baidu.com/img/bd_logo1.png" width="88px" height="31px" />
+												{else}
+												无
+												{/if}												
 											</td>
                                             <td>
-												<button type="button" class="btn btn-link">编辑</button>
-												<button type="button" class="btn btn-link">删除</button>
+												<button type="button" class="btn btn-link" req-data="act=add&id={$v.id}" id="btnedit_{$v.id}">编辑</button>
+												<button type="button" class="btn btn-link" req-data="act=del&id={$v.id}" id="btndel_{$v.id}">删除</button>
 											</td>
                                         </tr>
+										{/foreach}
                                     </tbody>
                                 </table>
                             </div>
@@ -72,7 +81,7 @@
 
     </div>
     <!-- /#wrapper -->
-	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_admin_pwd"></script>
+	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_friendlink_list"></script>
 	
 </body>
 

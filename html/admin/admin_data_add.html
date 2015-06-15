@@ -3,7 +3,7 @@
 <head>
 	{include file="admin/_header.html"}
 	
-	<link href="../resources/css/{WEBPATH_ADMIN}/admin_admin_pwd.css" rel="stylesheet" type="text/css" />
+	<link href="../resources/css/{WEBPATH_ADMIN}/admin_data_add.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -16,14 +16,72 @@
         <div id="page-wrapper">
             <!-- 内容部分 -->
 			
-			
+			<div class="row" id="first_row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">添加/修改 数据</div>
+                        <div class="panel-body">
+                            
+							<form id="main_form" role="form">
+								<div class="form-group">
+									<table>
+										<tr>
+											<td class="title_column">
+												<label>名称：</label>
+											</td>
+											<td>
+												<input class="form-control" placeholder="请输入名称" id="name" />
+											</td>
+										</tr>
+										<tr>
+											<td class="title_column">
+												<label>类别：</label>
+											</td>
+											<td>
+												<select class="form-control">
+													<option>1</option>
+													<option>2</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td class="title_column">
+												<label>排序：</label>
+											</td>
+											<td>
+												<input class="form-control" value="0" id="sort" type="number" />
+											</td>
+										</tr>
+										<tr>
+											<td class="title_column">
+												<label>内容：</label>
+											</td>
+											<td>
+												<textarea id="content" name="content"></textarea>							
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<div class="btn_submit_div">
+													<button type="button" id="btn_submit" class="btn btn-outline btn-primary">添加</button>
+												</div>
+											</td>
+										</tr>
+									</table>									
+								</div>
+							</form>
+							
+                        </div>
+                    </div>
+                </div>
+            </div>
 			
         </div>
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
-	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_admin_pwd"></script>
+	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_data_add"></script>
 	
 </body>
 

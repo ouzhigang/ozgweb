@@ -8,15 +8,12 @@ require("smarty/Smarty.class.php");
 
 require("../comm/class/SqlText.php");
 require("../comm/class/Page.php");
-require("../comm/class/Runtime.php");
 require("../comm/class/FileUtil.php");
 require("../comm/class/Encrypt.php");
 require("../comm/functions.php");
 require("../comm_bll/share.php");
 
 $curr_file_name = strtolower(self());
-
-$runtime = new Runtime();
 
 $db = new ezSQL_pdo($db_cfg["connect"], $db_cfg["user"], $db_cfg["pwd"]);
 if(strpos($db_cfg["connect"], "mysql") !== false)

@@ -1,4 +1,80 @@
 
+var curr_page = 1;
+var page_count = 1;
+var alert_dialog;
+
+function show_data(page) {
+	
+	$.ajax({
+		url: "admin_feedback.php",
+		type: "get",
+		dataType: "json",
+		data: "act=getlist&page=" + page,
+		beforeSend: function() {
+			
+		},
+		success: function(res, status) {
+			if(res.code == 0) {
+				
+				$("#datalist > tbody").empty();
+				for(var i = 0; i < res.data.list.length; i++) {				
+					var row = "<tr>";
+					row += "<td>" + res.data.list[i].id + "</td>"
+					row += "<td>" + res.data.list[i].content + "</td>";
+					row += "<td>" + res.data.list[i].add_time + "</td>";
+					row += "<td><button class=\"btn btn-outline btn-link\" type=\"button\" id=\"id_" + res.data.list[i].id + "\" req-data=\"act=del&id=" + res.data.list[i].id + "\">删除</button></td>";
+					row += "</tr>";
+					
+					$("#datalist > tbody").append(row);
+				}
+				
+				page = res.data.page;
+				page_count = res.data.page_count;				
+				$("#page").html(page);
+				$("#page_count").html(page_count);
+				
+				//点击删除
+				$("button[id^='id_']").click(function() {
+					var btndel = $(this);
+					var conform_dialog = ready_confirm_dialog(function() {
+						$.ajax({
+							url: "admin_feedback.php",
+							type: "get",
+							dataType: "json",
+							data: btndel.attr("req-data"),
+							beforeSend: function() {
+								btndel.attr("disabled", true);
+							},
+							success: function(res, status) {
+								if(res.code == 0) {
+									
+									show_data(curr_page);
+								}
+								else {							
+									$("#dialog_message").html(res.desc);
+									alert_dialog.dialog("open");
+								}
+							},
+							complete: function() {
+								conform_dialog.dialog("close");
+							}
+						});
+					});
+					$("#dialog_message").html("确定删除吗？");
+					conform_dialog.dialog("open");
+					conform_dialog.parent().prev().css('z-index', 9998);
+					conform_dialog.parent().css('z-index', 9999);
+					
+				});
+			}
+		},
+		complete: function() {
+			
+		}
+	});
+	
+}
+
 require.config({
     paths: {
         "jquery": "http://libs.useso.com/js/jquery/2.1.1/jquery.min",
@@ -27,33 +103,30 @@ require(
 	function($) {
 		page_init();
 		
-		$('#dataTables-example').DataTable({
-			"responsive": true,
-			"language": {
-				"info": "页次 _PAGE_ / _PAGES_",
-				"infoEmpty": "没有数据",
-				"loadingRecords": "数据读取中...",
-				"lengthMenu": "显示 _MENU_ 条记录",
-				"paginate": {
-					"first": "首页",
-					"previous": "上一页",
-					"next": "下一页",
-					"last": "末页"
-				}
-			},
-			"pageLength": 25,
-			"searching": false,
-			"processing": true,
-			/*"ajax": {
-				"url": "data.json",
-				"dataSrc": function(json) {
-					for(var i = 0; i < json.length; i++) {
-						json[i][0] = "<a href=\"message\">View message</a>";
-					}
-					return json;
-				}
-			}*/
-			
-        });
+		//dialog
+		alert_dialog = ready_alert_dialog();
+		
+		show_data(curr_page);		
+		$("#page_first").click(function() {
+			curr_page = 1;		
+			show_data(curr_page);	
+		});
+		$("#page_prev").click(function() {
+			curr_page--;
+			if(curr_page < 1)
+				curr_page = 1;
+			show_data(curr_page);	
+		});
+		$("#page_next").click(function() {
+			curr_page++;
+			if(curr_page > page_count)
+				curr_page = page_count;
+			show_data(curr_page);
+		});
+		$("#page_last").click(function() {
+			curr_page = page_count;		
+			show_data(page_count);	
+		});
+		
 	}
 );

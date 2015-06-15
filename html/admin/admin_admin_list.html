@@ -9,7 +9,6 @@
     <!-- DataTables Responsive CSS -->
     <link href="../resources/{SB_ADMIN_2_PATH}/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet" />
 	
-	<link href="../resources/css/{WEBPATH_ADMIN}/admin_admin_pwd.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -39,20 +38,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+										{foreach from=$data item=v}
                                         <tr>
                                             <td>
-												<h5>1</h5>
+												<h5>{$v.id}</h5>
 											</td>
                                             <td>
-												<h5>admin</h5>
+												<h5>{$v.name}</h5>
 											</td>
                                             <td>
-												<h5>2015-01-01 00:00:00</h5>
+												<h5>{$v.add_time}</h5>
 											</td>
                                             <td>
-												<button type="button" class="btn btn-link">删除</button>
+												<button type="button" class="btn btn-link" req-data="act=del&id={$v.id}">删除</button>
 											</td>
                                         </tr>
+										{/foreach}
                                     </tbody>
                                 </table>
                             </div>
@@ -67,7 +68,7 @@
 
     </div>
     <!-- /#wrapper -->
-	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_admin_pwd"></script>
+	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_admin_list"></script>
 	
 </body>
 

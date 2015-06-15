@@ -3,7 +3,7 @@
 <head>
 	{include file="admin/_header.html"}
 	
-	<link href="../resources/css/{WEBPATH_ADMIN}/admin_admin_pwd.css" rel="stylesheet" type="text/css" />
+	<link href="../resources/css/{WEBPATH_ADMIN}/admin_admin_add.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -19,40 +19,40 @@
 			<div class="row" id="first_row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">修改密码</div>
+                        <div class="panel-heading">添加管理员</div>
                         <div class="panel-body">
                             
 							<form id="main_form" role="form">
 								<div class="form-group">
 									<table>
 										<tr>
-											<td>
+											<td class="title_column">
 												<label>用户名：</label>
 											</td>
 											<td>
-												<input class="form-control" placeholder="请输入用户名" id="name" />
+												<input class="form-control" placeholder="请输入用户名" id="name" name="name" />												
 											</td>
 										</tr>
 										<tr>
-											<td>
+											<td class="title_column">
 												<label>密码：</label>
 											</td>
 											<td>
-												<input class="form-control" placeholder="请输入密码" type="password" id="pwd" />
+												<input class="form-control" placeholder="请输入密码" type="password" id="pwd" name="pwd" />
 											</td>
 										</tr>
 										<tr>
-											<td>
+											<td class="title_column">
 												<label>确认密码：</label>
 											</td>
 											<td>
-												<input class="form-control" placeholder="请输入确认密码" type="password" id="pwd2" />
+												<input class="form-control" placeholder="请输入确认密码" type="password" id="pwd2" name="pwd2" />
 											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
 												<div class="btn_submit_div">
-													<button type="button" id="btn_submit" class="btn btn-outline btn-primary">添加</button>
+													<input type="submit" id="btn_submit" class="btn btn-outline btn-primary" value="添加" />
 												</div>
 											</td>
 										</tr>
@@ -61,11 +61,8 @@
 							</form>
 							
                         </div>
-                        <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->
                 </div>
-                <!-- /.col-lg-4 -->                				
             </div>
 			
         </div>
@@ -73,7 +70,7 @@
 
     </div>
     <!-- /#wrapper -->
-	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_admin_pwd"></script>
+	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_admin_add"></script>
 	
 </body>
 
