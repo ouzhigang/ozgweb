@@ -10,7 +10,15 @@ sb-admin2需要自行下载，https://github.com/IronSummitMedia/startbootstrap-
 ================
 
 
-建立目录：/ozgweb/smarty/cache/，/ozgweb/smarty/configs/，/ozgweb/smarty/templates_c/，/ozgweb/upload/
+建立目录：
+
+/ozgweb/smarty/cache/
+
+/ozgweb/smarty/configs/
+
+/ozgweb/smarty/templates_c/
+
+/ozgweb/upload/
 
 
 ================
