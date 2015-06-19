@@ -3,7 +3,7 @@
 <head>
 	{include file="admin/_header.html"}
 	
-	<link href="../resources/css/{WEBPATH_ADMIN}/admin_admin_pwd.css" rel="stylesheet" type="text/css" />
+	<link href="../resources/css/{WEBPATH_ADMIN}/admin_dataclass_add.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -26,36 +26,36 @@
 								<div class="form-group">
 									<table>
 										<tr>
-											<td>
+											<td class="title_column">
 												<label>名称：</label>
 											</td>
 											<td>
-												<input class="form-control" placeholder="请输入名称" id="name" />
+												<input class="form-control" placeholder="请输入名称" id="name" name="name" value="{$row.name}" />
 											</td>
 										</tr>
 										<tr>
-											<td>
+											<td class="title_column">
 												<label>排序：</label>
 											</td>
 											<td>
-												<input class="form-control" type="number" id="pwd" value="0" />
+												<input class="form-control" type="number" id="sort" name="sort" value="{$row.sort}" />
 											</td>
 										</tr>
 										<tr>
-											<td>
+											<td class="title_column">
 												<label>父级：</label>
 											</td>
 											<td>
-												<select class="form-control">
-													<option>1</option>
-													<option>2</option>
-												</select>
+												<input id="parent_selected" type="hidden" value="{$row.parent_id}" />
+												<div id="parent"></div>
 											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
 												<div class="btn_submit_div">
-													<button type="button" id="btn_submit" class="btn btn-outline btn-primary">添加</button>
+													<input type="hidden" id="id" name="id" value="{$row.id}" />
+													<input type="hidden" id="type" name="type" value="{$row.type}" />
+													<input type="submit" id="btn_submit" class="btn btn-outline btn-primary" value="{if $row.id == 0}添加{else}更新{/if}" />
 												</div>
 											</td>
 										</tr>
@@ -73,7 +73,7 @@
 
     </div>
     <!-- /#wrapper -->
-	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_admin_pwd"></script>
+	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_dataclass_add"></script>
 	
 </body>
 

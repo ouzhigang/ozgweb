@@ -7,7 +7,6 @@ require("ez_sql/ez_sql_pdo.php");
 require("smarty/Smarty.class.php");
 
 require("../comm/class/SqlText.php");
-require("../comm/class/Page.php");
 require("../comm/class/FileUtil.php");
 require("../comm/class/Encrypt.php");
 require("../comm/functions.php");
@@ -26,13 +25,6 @@ $smarty->template_dir = "../html/";
 $smarty->compile_dir = constant("SMARTY_PATH") . "templates_c/";
 $smarty->config_dir = constant("SMARTY_PATH") . "configs/";
 $smarty->cache_dir = constant("SMARTY_PATH") . "cache/";
-
-$page = new Page();
-$page->pageIndexName = "page";
-$page->firstText = "首页";
-$page->prevText = "上一页";
-$page->nextText = "下一页";
-$page->lastText = "末页";
 
 $novalid = array();
 $novalid[] = "admin_articlesingle.php";

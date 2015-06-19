@@ -30,7 +30,7 @@
 												<label>名称：</label>
 											</td>
 											<td>
-												<input class="form-control" placeholder="请输入名称" id="name" />
+												<input class="form-control" placeholder="请输入名称" id="name" name="name" value="{$row.name}" />
 											</td>
 										</tr>
 										<tr>
@@ -38,10 +38,8 @@
 												<label>类别：</label>
 											</td>
 											<td>
-												<select class="form-control">
-													<option>1</option>
-													<option>2</option>
-												</select>
+												<input id="dataclass_selected" type="hidden" value="{$row.dataclass_id}" />
+												<div id="dataclass"></div>
 											</td>
 										</tr>
 										<tr>
@@ -49,7 +47,7 @@
 												<label>排序：</label>
 											</td>
 											<td>
-												<input class="form-control" value="0" id="sort" type="number" />
+												<input class="form-control" id="sort" name="sort" type="number" value="{$row.sort}" />
 											</td>
 										</tr>
 										<tr>
@@ -57,13 +55,15 @@
 												<label>内容：</label>
 											</td>
 											<td>
-												<textarea id="content" name="content"></textarea>							
+												<textarea id="content" name="content">{$row.content}</textarea>							
 											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
 												<div class="btn_submit_div">
-													<button type="button" id="btn_submit" class="btn btn-outline btn-primary">添加</button>
+													<input type="hidden" id="id" name="id" value="{$row.id}" />
+													<input type="hidden" id="type" name="type" value="{$row.type}" />
+													<input type="submit" id="btn_submit" class="btn btn-outline btn-primary" value="{if $row.id == 0}添加{else}更新{/if}" />
 												</div>
 											</td>
 										</tr>

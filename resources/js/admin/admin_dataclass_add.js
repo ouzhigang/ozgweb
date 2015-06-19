@@ -1,29 +1,14 @@
 
-function show_picture_row(is_picture_val) {
-	
-	if(is_picture_val == 1) {
-		$("#picture").parent().parent().show();
-	}
-	else {
-		$("#picture").parent().parent().hide();
-	}
-}
-
 require(
 	[ "config" ], 
 	function () {
-		require([ "admin.friendlink_add" ]);
+		require([ "admin.dataclass_add" ]);
 	}), 
-	define("admin.friendlink_add", [ "jquery", "jquery_ui", "jquery_validate", "bootstrap", "metisMenu", "sb_admin_2", "md5", "common" ], function ($) {		
+	define("admin.dataclass_add", [ "jquery", "jquery_ui", "jquery_validate", "jquery_LinkageList", "bootstrap", "metisMenu", "sb_admin_2", "md5", "utility", "common" ], function ($) {
 		page_init();
 		
 		//dialog
 		var alert_dialog = ready_alert_dialog();
-		
-		$("input[name='is_picture']").change(function() {
-			show_picture_row($(this).val());
-		});
-		show_picture_row($("input[name='is_picture']:checked").val());
 		
 		$("#main_form").validate({
 			rules: {
@@ -33,14 +18,7 @@ require(
 				sort: {
 					required: true,
 					digits: true
-				},
-				url: {
-					required: true,
-					url:true
-				},
-				picture: {
-					url:true
-				}
+				}				
 			},
 			messages: {
 				name: {
@@ -49,19 +27,12 @@ require(
 				sort: {
 					required: "没有填写排序",
 					number: "请输入整数"
-				},
-				url: {
-					required: "没有填写URL",
-					url: "没有填写正确的URL"
-				},
-				picture: {
-					url: "没有填写正确的URL"
-				}
+				}				
 			},
 			submitHandler: function(form) {
 								
 				$.ajax({
-					url: "admin_friendlink.php",
+					url: "admin_dataclass.php",
 					type: "get",
 					dataType: "json",
 					data: "act=addsubmit&" + $(form).serialize(),
@@ -71,7 +42,7 @@ require(
 					success: function(res, status) {
 						if(res.code == 0) {
 							
-							location.href = "admin_friendlink.php";
+							location.href = "admin_dataclass.php?type=" + $("#type").val();
 						}
 						else {
 							$("#dialog_message").html(res.desc);
@@ -82,6 +53,30 @@ require(
 						$("#btn_submit").attr("disabled", false);
 					}
 				});
+				
+			}
+		});
+		
+		//无限级下拉框
+		$.ajax({
+			url: "admin_dataclass.php",
+			type: "get",
+			dataType: "json",
+			data: "act=get_tree_selector&type=" + getUrlParam("type"),
+			beforeSend: function() {
+				
+			},
+			success: function(res, status) {				
+				$("#parent").LinkageList(res.data, {
+					objId: "parent",
+					inputObjId: "parent_id",
+					css: "form-control",
+					style: "width: 20%; margin-right: 10px;",
+					selectedValue: $("#parent_selected").val() == "0" ? null : $("#parent_selected").val()
+				});
+				
+			},
+			complete: function() {
 				
 			}
 		});

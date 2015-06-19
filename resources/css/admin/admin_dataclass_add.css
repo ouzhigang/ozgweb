@@ -1,10 +1,11 @@
 
 #main_form table {
-	width: 95%;
+	width: 70%;
+	
 }
 
 #main_form table .title_column {
-	width: 15%;
+	width: 20%;
 	height: 45px;
 	text-align: right;
 	padding-right: 40px;
@@ -17,5 +18,6 @@
 
 .btn_submit_div {
 	padding-top: 20px;
+	padding-right: 150px;
 	text-align: center;
 }
