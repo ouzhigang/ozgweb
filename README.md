@@ -6,6 +6,7 @@ ckeditor需要自行下载，对应目录/ozgweb/ckeditor/，在/ozgweb/ckeditor
 
 sb-admin2需要自行下载，https://github.com/IronSummitMedia/startbootstrap-sb-admin-2 ，对应目录/ozgweb/resources/startbootstrap-sb-admin-2-1.0.7/
 
+在php.ini设置一个include_path路径，将ez_sql和smarty复制进去。
 
 ================
 
