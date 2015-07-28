@@ -1,46 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>无标题文档</title>
-<link href="../css/admin/style.css" rel="stylesheet" type="text/css" />
-<link href="../css/jquery/jquery.treeTable.css" rel="stylesheet" type="text/css" />
-<link href="../css/jquery/jquery.treeTable.master.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="{$js_jquery}"></script>
-<script type="text/javascript" src="../js/jquery/jquery.ui.js"></script>
-<script type="text/javascript" src="../js/jquery/jquery.treeTable.min.js"></script>
-{literal}
-<script type="text/javascript">
-	$(function(){
-		$("#list").treeTable({expandable: false});
-	});
-</script>
-{/literal}
+	{include file="admin/_header.html"}
+	
+	<link href="../resources/css/{WEBPATH_ADMIN}/admin_dataclass_list.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-<table width="60%" cellspacing="0" cellpadding="0">
-  <tr>
-    <td>
-	  
-	  <table id="list" style="width:100%">
-          <thead>
-            <tr>
-              <th style="width:70%">名称</th>
-              <th style="width:30%">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            {$jquery_tree_table}
-          </tbody>
-        </table>
+    <div id="wrapper">
+		{include file="admin/_dialog.html"}
 		
-	</td>
-  </tr>
-</table>
-<div align="center">
-<br />
-{$spent}
-</div>
+        <!-- Navigation -->        
+		{include file="admin/_admin_navbar.html"}
+
+        <div id="page-wrapper">
+            <!-- 内容部分 -->
+			
+			<div class="row" id="first_row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">分类列表</div>
+                        <div class="panel-body">
+							<input type="hidden" id="type" name="type" value="{$smarty.request.type}" />
+							<ul class="list-unstyled" id="datalist"></ul>							
+						</div>
+					</div>
+				</div>
+			</div>
+			
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_dataclass_list"></script>
+	
 </body>
+
 </html>

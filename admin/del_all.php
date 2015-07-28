@@ -4,7 +4,7 @@ require('init.php');
 /*
 form1为表单
 del为隐藏域
-$_GET["t"]为目标表
+$_REQUEST["t"]为目标表
 <script>
 function del()
 {
@@ -34,23 +34,23 @@ function del()
 
 
 /*
-$db->query('delete from '.constant('db_prefix').' where id in('.$_POST["del"].')');	
+$db->query('delete from '.constant('db_prefix').' where id in('.$_REQUEST["del"].')');	
 
 
-if(empty($_GET["url"]))
+if(empty($_REQUEST["url"]))
 {
 	Utility::msg("删除成功");
 }
 else
 {
-	Utility::msg("删除成功",$_GET["url"]);
+	Utility::msg("删除成功",$_REQUEST["url"]);
 }
 */
 
-$t = str_filter($_GET['t']);
-$del = str_filter($_POST["del"]);
-$url = str_filter($_GET["url"]);
-$type = str_filter($_GET["type"]);
+$t = str_filter($_REQUEST['t']);
+$del = str_filter($_REQUEST["del"]);
+$url = str_filter($_REQUEST["url"]);
+$type = str_filter($_REQUEST["type"]);
 
 if($del){
 	if($t == constant('PDO_CONNECT') . "pictures") {
