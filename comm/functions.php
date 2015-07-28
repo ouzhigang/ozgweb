@@ -1,72 +1,47 @@
 <?php
-//[常用函数] 2011-03-27
 
-//----检查指定Cookie(bool)----
-function has_cookie($name)
-{
-	if(empty($_COOKIE[$name])||$_COOKIE[$name]==NULL)
-	{			
-		return false;
-	}			
-	else
-	{
+function has_cookie($name) {	
+	if(isset($_COOKIE[$name]) && $_COOKIE[$name])
 		return true;
-	}
+	else
+		return false;
 }
 
 //----检查指定Session(bool)----
-function has_session($name)
-{
-	if(empty($_SESSION[$name]))
-	{			
-		return false;
-	}			
-	else
-	{
+function has_session($name) {	
+	if(isset($_SESSION[$name]) && $_SESSION[$name])
 		return true;
-	}
+	else
+		return false;
 }
 	
 //获取总页数
 //$count(int),总记录数
 //$pageSize(int),每页显示记录数
-function page_count($count,$pageSize)
-{
-	if ($count % $pageSize == 0)
-	{
+function page_count($count, $pageSize) {
+	if ($count % $pageSize == 0) {
 		return $count / $pageSize;
 	}
-	else
-	{
+	else {
 		return floor($count / $pageSize) + 1;
 	}
 }
 
 //合并ArrayList
 //$array(array) 这个$array里面是要合并的array
-function array_merger($array)
-{
-	for($i = 0; $i < count($array); $i++)
-	{
+function array_merger($array) {
+	for($i = 0; $i < count($array); $i++) {
 		$childArray = $array[$i];
-		foreach($childArray as $child)
-		{
+		foreach($childArray as $child) {
 			$tmpList[] = $child;
 		}
 	}
 	return $tmpList;
-}	
-
-//----获取当前时间(string)----
-function now()
-{
-	return date("Y-m-d H:i:s");
 }
 
 //----过滤危险字符(string)----
 //$str(string)目标字符
-function replace_sql($str)
-{
+function replace_sql($str) {
 	$str = trim(strtolower($str));	
 	$str = str_replace("<", "&lt;", $str);	
 	$str = str_replace(">", "&gt;", $str);	
@@ -93,8 +68,7 @@ function replace_sql($str)
 }
 
 //----对整个页面进行SQL字符验证(bool)----
-function page_valid()
-{
+function page_valid() {
 	$str_list[] = "<";
 	$str_list[] = ">";
 	$str_list[] = "'";
@@ -119,17 +93,17 @@ function page_valid()
 	settype($page_valid_get, 'array');		
 	$tmp = true;
 	for($i = 0; $i < count($str_list); $i++) {		
-		foreach($_POST as $key => $value) {
+		foreach($_REQUEST as $key => $value) {
 			if(str_exists($value, $str_list[$i])) {
 				$tmp = false;
 				if(!array_exists($page_valid_post, $str_list[$i])) {
-					$page_valid_post[]=$str_list[$i];
+					$page_valid_post[] = $str_list[$i];
 				}					
 			}
 		}
 		
-		foreach($_GET as $key => $value) {
-			if(str_exists($key,$str_list[$i]) || str_exists($value,$str_list[$i])) {
+		foreach($_REQUEST as $key => $value) {
+			if(str_exists($key, $str_list[$i]) || str_exists($value, $str_list[$i])) {
 				$tmp = false;
 				if(!array_exists($page_valid_get, $str_list[$i])) {
 					$page_valid_get[] = $str_list[$i];
@@ -139,7 +113,7 @@ function page_valid()
 	}
 	
 	setcookie("ozg_beta", "ozg_beta");
-	if($_COOKIE){
+	if($_COOKIE) {
 		if(count($page_valid_post) > 0) {
 			setcookie("page_valid_post", implode(",", $page_valid_post));
 		}
@@ -153,55 +127,44 @@ function page_valid()
 }
 
 //返回当前请求文件
-function self()
-{
+function self() {
 	return str_replace("/", "", strrchr($_SERVER['PHP_SELF'], "/"));
 }
 
 //获取随机字符(string)
 //$type(int)返回类型(1-7)
 //$length(int)字符长度
-function rand_str($type, $length)
-{
+function rand_str($type, $length) {
 	$str1 = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
 	$str2 = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
 	$str3 = "0,1,2,3,4,5,6,7,8,9";
 	
-	if ($type == 1)
-	{
+	if ($type == 1) {
 		$content = $str1;
 	}
-	else if ($type == 2)
-	{
+	else if ($type == 2) {
 		$content = $str2;
 	}
-	else if ($type == 3)
-	{
+	else if ($type == 3) {
 		$content = $str3;
 	}
-	else if ($type == 4)
-	{
+	else if ($type == 4) {
 		$content = $str1 . "," . $str2;
 	}
-	else if ($type == 5)
-	{
+	else if ($type == 5) {
 		$content = $str2 . "," . $str3;
 	}
-	else if ($type == 6)
-	{
+	else if ($type == 6) {
 		$content = $str1 . "," . $str3;
 	}
-	else if ($type == 7)
-	{
+	else if ($type == 7) {
 		$content = $str1 . "," . $str2 . "," . $str3;
 	}
 	
 	$strs = explode(",", $content);
 	
-	for($i = 0; $i < $length; $i++)
-	{ 
-		do
-		{
+	for($i = 0; $i < $length; $i++) { 
+		do {
 			$r = rand(0, strlen($content));
 		}
 		while(empty($strs[$r]));
@@ -215,16 +178,13 @@ function rand_str($type, $length)
 //----弹出信息并重定向(void)----
 //$str(string)弹出信息
 //$url(string)重定向连接
-function msg_box($str, $url = NULL, $frameset = NULL)
-{
+function msg_box($str, $url = null, $frameset = null) {
 	$js = "<script type='text/javascript'>";
-	if(!empty($str))
-	{
+	if(!empty($str)) {
 		$js .= "alert(\"" . $str . "\");";
 	}
 
-	if(!empty($url))
-	{
+	if(!empty($url)) {
 		if(empty($frameset)) {
 			$js .= "location.href='" . $url . "';";
 		}
@@ -232,8 +192,7 @@ function msg_box($str, $url = NULL, $frameset = NULL)
 			$js .= "window." . $frameset . ".location.href='" . $url . "';";
 		}
 	}				
-	else
-	{
+	else {
 		$js .= "history.back();";
 	}
 
@@ -244,20 +203,15 @@ function msg_box($str, $url = NULL, $frameset = NULL)
 //----重定向(void)----
 //$url(string)重定向连接
 //$frameset(string)目标框架
-function redirect($url, $frameset = null)
-{
-	if(empty($url))
-	{
+function redirect($url, $frameset = null) {
+	if(empty($url)) {
 		$js = "history.back();";
 	}
-	else
-	{
-		if(!empty($frameset))
-		{
+	else {
+		if(!empty($frameset)) {
 			$js = "window." . $frameset . ".location.href='" . $url . "';";
 		}
-		else
-		{
+		else {
 			$js = "window.location.href='" . $url . "';";
 		}
 	}
@@ -266,36 +220,21 @@ function redirect($url, $frameset = null)
 }
 
 //----获取客户机IP(string)----
-function get_ip()
-{ 
-	if ($_SERVER["HTTP_X_FORWARDED_FOR"])
-	{
-		$ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
-	}
-	else if ($_SERVER["HTTP_CLIENT_IP"])
-	{
-		$ip = $_SERVER["HTTP_CLIENT_IP"];
-	}
-	else if ($_SERVER["REMOTE_ADDR"])
-	{
-		$ip = $_SERVER["REMOTE_ADDR"];
-	}
-	else if (getenv("HTTP_X_FORWARDED_FOR"))
-	{
-		$ip = getenv("HTTP_X_FORWARDED_FOR");
-	}
-	else if (getenv("HTTP_CLIENT_IP"))
-	{
-		$ip = getenv("HTTP_CLIENT_IP");
-	}
-	else if (getenv("REMOTE_ADDR"))
-	{
-		$ip = getenv("REMOTE_ADDR");
-	}
-	else
-	{
-		$ip = "Unknown";
-	}
+function get_ip() { 
+	if(isset($_SERVER["HTTP_X_FORWARDED_FOR"]))	
+		$ip = $_SERVER["HTTP_X_FORWARDED_FOR"];	
+	else if(isset($_SERVER["HTTP_CLIENT_IP"]))
+		$ip = $_SERVER["HTTP_CLIENT_IP"];	
+	else if(isset($_SERVER["REMOTE_ADDR"]))
+		$ip = $_SERVER["REMOTE_ADDR"];	
+	else if(getenv("HTTP_X_FORWARDED_FOR"))
+		$ip = getenv("HTTP_X_FORWARDED_FOR");	
+	else if(getenv("HTTP_CLIENT_IP"))
+		$ip = getenv("HTTP_CLIENT_IP");	
+	else if(getenv("REMOTE_ADDR"))
+		$ip = getenv("REMOTE_ADDR");	
+	else	
+		$ip = "Unknown";	
 	return $ip;
 }
 
@@ -314,13 +253,12 @@ function get_string($str, $len = 12, $dot = true) {
 			$c = 3;
             $t = substr($str, $i, $c);
             $l += 2;
-        } 
-		
+        }		
 		elseif (ord($t) >= 192) {
 			$c = 2;
             $t = substr($str, $i, $c);
             $l += 2;
-        } 
+        }
 		else {
 			$c = 1;
             $l++;            
@@ -329,7 +267,7 @@ function get_string($str, $len = 12, $dot = true) {
 		// $t = substr($str, $i, $c);
         $i += $c;
         
-		if ($l > $len) 
+		if($l > $len) 
 			break;
         $a[] = $t;
     }
@@ -346,70 +284,46 @@ function get_string($str, $len = 12, $dot = true) {
 	return $re;
 }
 
-//获取上传文件名
-//$hz(string)文件后缀名
-function upload_filename($hz)
-{
-	return date("YmdHis").$hz;
-}
-
 //上传文件(bool)
 //$inputFile文件域
 //$hzs(array)后缀名列表
 //$saveFile(string)目标路径(不需要后缀名)
-function upload($inputFile, $hzs, $saveFile)
-{
+function upload($inputFile, $hzs, $saveFile) {
 	//获取服务器本地路径
 	$saveFile = $_SERVER['DOCUMENT_ROOT'] . $saveFile;
 	
 	//最大允许上传100M
-	$maxsize = 100 * 1024 * 1024;		
-	
-	
+	$maxsize = 100 * 1024 * 1024;
+		
 	//取上传文件的后缀名并转换为小写
 	$tmp_hz = strtolower(strrchr($inputFile["name"], "."));
 	
-	for($i = 0; $i < count($hzs); $i++)
-	{
-		if($tmp_hz == $hzs[$i])
-		{
+	for($i = 0; $i < count($hzs); $i++) {
+		if($tmp_hz == $hzs[$i]) {
 			$b = true;
 			break;
 		}
-		else
-		{
-			$b = false;
-		}
+		else		
+			$b = false;		
 	}
 	
-	if($b)
-	{			
-		if($inputFile["size"] > $maxsize)
-		{
-			$b = false;
-		}
-		else
-		{
+	if($b) {			
+		if($inputFile["size"] > $maxsize)		
+			$b = false;		
+		else {
 			$saveFile .= $tmp_hz;
 			$isOK = move_uploaded_file($inputFile["tmp_name"], $saveFile);
-			if($isOK)
-			{
-				$b = true;
-			}
-			else
-			{
-				$b = false;
-			}
+			if($isOK)			
+				$b = true;			
+			else			
+				$b = false;			
 		}
 	}
 	
 	//如果上传失败就删除临时文件
-	if(!$b)
-	{
-		if(file_exists($inputFile["tmp_name"]))
-		{
-			unlink($inputFile["tmp_name"]);
-		}	
+	if(!$b)	{
+		if(file_exists($inputFile["tmp_name"]))		
+			unlink($inputFile["tmp_name"]);		
 	}
 	
 	return $b;
@@ -484,42 +398,33 @@ function image_resize($srcFile, $toFile, $toW, $toH, $file_type = "png") {
 }
 
 //Html编码
-function html_encoding($s)
-{
-	if(!empty($s))
-	{
+function html_encoding($s) {
+	if(!empty($s)) {
 		$s = str_replace("<", "&lt;", $s);
 		$s = str_replace(">", "&gt;", $s);
 		$s = str_replace(" ", "&nbsp;", $s);
 		$s = str_replace("\"", "&quot;", $s);
 		return $s;
 	}
-	else
-	{
+	else	
 		return null;	
-	}
 }
 
 //Html解码
-function html_decoding($s)
-{
-	if(!empty($s))
-	{
+function html_decoding($s) {
+	if(!empty($s)) {
 		$s = str_replace("&lt;", "<", $s);
 		$s = str_replace("&gt;", ">", $s);
 		$s = str_replace("&nbsp;", " ", $s);
 		$s = str_replace("&quot;", "\"", $s);
 		return $s;
 	}
-	else
-	{
+	else	
 		return null;	
-	}
 }
 
 //以保存文件的方式保存Post提交的二进制(目前主要用来处理as3提交的ByteArray)
-function save_binary($path)
-{
+function save_binary($path) {
 	//$path是文件保存路径
 	//$data是二进制变量
 	$data = file_get_contents('php://input');
@@ -528,37 +433,23 @@ function save_binary($path)
 }
 
 //检测客户端是否使用手机浏览
-function is_wap_client()
-{
+function is_wap_client() {
 	if(is_web_client())	
-	{
 		return false;	
-	}
-	else
-	{
-		return true;
-	}
+	else	
+		return true;	
 }
 //检测客户端是否使用电脑的浏览器浏览
-function is_web_client()
-{
-	if(has_string($_SERVER['HTTP_USER_AGENT'], "Mozilla"))
-	{
-		return true;
-	}
-	elseif(has_string($_SERVER['HTTP_USER_AGENT'], "Opera"))
-	{
-		return true;
-	}
+function is_web_client() {
+	if(has_string($_SERVER['HTTP_USER_AGENT'], "Mozilla"))	
+		return true;	
+	elseif(has_string($_SERVER['HTTP_USER_AGENT'], "Opera"))	
+		return true;	
 	
-	if(has_string($_SERVER['HTTP_ACCEPT'], "Mozilla"))
-	{
-		return true;
-	}
-	elseif(has_string($_SERVER['HTTP_ACCEPT'], "Opera"))
-	{
-		return true;
-	}		
+	if(has_string($_SERVER['HTTP_ACCEPT'], "Mozilla"))	
+		return true;	
+	elseif(has_string($_SERVER['HTTP_ACCEPT'], "Opera"))	
+		return true;	
 	
 	return false;
 }
@@ -569,12 +460,12 @@ function is_robot() {
 		$kw_spiders = 'Bot|Crawl|Spider|slurp|sohu-search|lycos|robozilla';
 		$kw_browsers = 'MSIE|Netscape|Opera|Konqueror|Mozilla';
 		if(!str_exists($_SERVER['HTTP_USER_AGENT'], 'http://') && preg_match("/($kw_browsers)/i", $_SERVER['HTTP_USER_AGENT'])) {
-			define('IS_ROBOT', FALSE);
-		} elseif(preg_match("/($kw_spiders)/i", $_SERVER['HTTP_USER_AGENT'])) {
-			define('IS_ROBOT', TRUE);
-		} else {
-			define('IS_ROBOT', FALSE);
+			define('IS_ROBOT', false);
 		}
+		elseif(preg_match("/($kw_spiders)/i", $_SERVER['HTTP_USER_AGENT']))
+			define('IS_ROBOT', true);		
+		else
+			define('IS_ROBOT', false);		
 	}
 	return IS_ROBOT;
 }
@@ -613,10 +504,10 @@ function rand_color($s = false) {
 		$rand .= substr($string, mt_rand(0, strlen($string) - 1), 1);
 	}
 	if($s) {
-		$color = "#" . $rand;		
+		$color = "#" . $rand;
 	}
 	else {
-		$color = $rand;		
+		$color = $rand;
 	}
 	return $color;
 }
@@ -639,40 +530,37 @@ function rand_colors($length = 10, $s = false) {
 //$arr:array<double>
 function arr_max_val($arr = array()) {
 	$c = count($arr);
-	if($c == 0) {
+	if($c == 0)
 		return 0;	
-	}
 	
 	$tmpVal = 0;
 	for($i = 0; $i < $c; $i++) {
-		if($i == 0) {
-			$tmpVal = max($arr[$i], $arr[$i+1]);
-		}
+		if($i == 0)
+			$tmpVal = max($arr[$i], $arr[$i+1]);		
 		
-		if($i > 0 && $i + 1 < $c) {
-			$tmpVal = max($tmpVal, $arr[$i + 1]);
-		}
+		if($i > 0 && $i + 1 < $c)
+			$tmpVal = max($tmpVal, $arr[$i + 1]);		
 	}
+	
 	return $tmpVal;
 }
 
 //xml转换成json
 function xml_to_json($source) {  
-	if(is_file($source)) {             //传的是文件，还是xml的string的判断  
-		$xml_array = simplexml_load_file($source);  
-	}
-	else {  
-		$xml_array = simplexml_load_string($source);  
-	}  
+	if(is_file($source))             //传的是文件，还是xml的string的判断  
+		$xml_array = simplexml_load_file($source);	
+	else
+		$xml_array = simplexml_load_string($source);
+	
 	$json = json_encode($xml_array);  //php5，以及以上，如果是更早版本，請下載JSON.php  
 	return $json;  
 }  
 
 //json转换成xml
-function json_to_xml($source, $charset = 'utf-8') {  
-	if(empty($source)) {  
+function json_to_xml($source, $charset = 'utf-8') {
+	if(empty($source))
 		return false;  
-	}  
+	
 	$array = json_decode($source);  //php5，以及以上，如果是更早版本，請下載JSON.php  
 	$xml  = '<?xml version="1.0" encoding="' . $charset . '"?>';  
 	$xml .= change($array);  
@@ -754,24 +642,21 @@ function str_filter($str) {
 //删除数组中的一个元素
 function array_remove_value(&$arr, $var) {
 	foreach ($arr as $key => $value) {
-		if(is_array($value)) {
-			array_remove_value($arr[$key], $var);
-		} 
+		if(is_array($value))
+			array_remove_value($arr[$key], $var);		
 		else {
 			$value = trim($value);
-			if($value == $var) {
-				unset($arr[$key]);
-			} 
-			else {
-				$arr[$key] = $value;
-			}
+			if($value == $var)
+				unset($arr[$key]);			
+			else
+				$arr[$key] = $value;			
 		}
 	}
 	
 	$tmp_arr = array();
-	foreach($arr as $value) {
+	foreach($arr as $value)
 		$tmp_arr[] = $value;
-	}
+	
 	$arr = $tmp_arr;
 	unset($tmp_arr);
 }

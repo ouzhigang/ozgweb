@@ -1,78 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-<link href="../css/admin/style.css" rel="stylesheet" type="text/css" />
-{literal}
-<script>
-//选择显示的div
-function selectdiv()
-{
-	var radio1=document.getElementById("radio1");
-	var radio2=document.getElementById("radio2");
-	var div1=document.getElementById("div1");
-	var div2=document.getElementById("div2");
-	if(radio1.checked)
-	{
-		div1.style.display="block";
-		div2.style.display="none";
-	}
-	else if(radio2.checked)
-	{
-		div1.style.display="none";
-		div2.style.display="block";
-	}
-}
-</script>
-{/literal}
+	{include file="admin/_header.html"}
+	
+	<link href="../resources/css/{WEBPATH_ADMIN}/admin_friendlink_add.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body onLoad="selectdiv();">
-<form name="form1" method="post" action="?act=add">
-<table class="tableBorder" cellSpacing="0" cellPadding="0" width="550" border="0">
-  <tr>
-    <th colspan="2" class="tableHeaderText">友情连接</th>
-  </tr>
-  <tr>
-    <td align="right">友情连接名称:</td>
-    <td>
-	  <input name="name" type="text" style="width:200px" value="{$row.name}" />
-	</td>
-  </tr>
-  <tr>
-    <td align="right">排序:</td>
-    <td>
-	  <input name="sort" type="text" style="width:200px" value="{$row.sort}" onKeyUp="if(isNaN(value))execCommand('undo')" />
-	</td>
-  </tr>
-  <tr>
-    <td align="right">友情连接地址:</td>
-    <td>
-	  <input name="url" type="text" style="width:200px" value="{$row.url}" />
-	</td>
-  </tr>
-  <tr>
-    <td align="right">连接图片地址:</td>
-    <td>	  
-	  <div id="div1"><input name="picture" type="text" style="width:200px" value="{$row.picture}" /></div><div id="div2" class="f2">隐藏</div>
-	</td>
-  </tr>
-  <tr>
-    <td align="right">&nbsp;&nbsp;&nbsp;&nbsp;连接类型:</td>
-    <td>
-	  <label><input type="radio" name="is_picture" id="radio1" onClick="selectdiv();" value="1" {if $row.is_picture}checked="checked"{/if} />图片连接</label>
-	  <label><input type="radio" name="is_picture" id="radio2" onClick="selectdiv();" value="0" {if !$row.is_picture}checked="checked"{/if} />文字连接</label>
-	</td>
-  </tr>
-  <tr align="center">
-    <td colspan="2">
-      <input name="id" type="hidden" value="{$row.id}" /> 
-	  <input name="提交" type="submit" value="提交" /> 
-	  <input value="后退" type="button" onClick="history.back()" />
-	</td>
-  </tr>
-</table>
-</form>
+<body>
+    <div id="wrapper">
+		{include file="admin/_dialog.html"}
+		
+        <!-- Navigation -->        
+		{include file="admin/_admin_navbar.html"}
+
+        <div id="page-wrapper">
+            <!-- 内容部分 -->
+			
+			<div class="row" id="first_row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><a href="admin_friendlink.php">友情链接列表</a> - 添加/修改</div>
+                        <div class="panel-body">
+                            
+							<form id="main_form" role="form">
+								<div class="form-group">
+									<table>
+										<tr>
+											<td class="title_column">
+												<label>名称：</label>
+											</td>
+											<td>
+												<input class="form-control" placeholder="请输入名称" id="name" name="name" value="{$row.name}" />												
+											</td>
+										</tr>
+										<tr>
+											<td class="title_column">
+												<label>排序：</label>
+											</td>
+											<td>
+												<input class="form-control" id="sort" name="sort" type="number" value="{$row.sort}" />
+											</td>
+										</tr>
+										<tr>
+											<td class="title_column">
+												<label>URL：</label>
+											</td>
+											<td>
+												<input class="form-control" placeholder="请输入URL" id="url" name="url" value="{$row.url}" />
+											</td>
+										</tr>
+										<tr>
+											<td class="title_column">
+												<label>图片类型：</label>
+											</td>
+											<td>
+												<div class="form-group is_picture">
+													<label class="radio-inline">
+														<input type="radio" name="is_picture" id="is_picture_0" value="0" {if $row.is_picture == 0}checked="checked"{/if} />文字链接
+													</label>
+													<label class="radio-inline">
+														<input type="radio" name="is_picture" id="is_picture_1" value="1" {if $row.is_picture == 1}checked="checked"{/if} />图片链接
+													</label>
+												</div>												
+											</td>
+										</tr>
+										<tr>
+											<td class="title_column">
+												<label>图片URL：</label>
+											</td>
+											<td>
+												<input class="form-control" placeholder="请输入图片URL" id="picture" name="picture" value="{$row.picture}" />
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<div class="btn_submit_div">
+													<input type="hidden" id="id" name="id" value="{$row.id}" />
+													<input type="submit" id="btn_submit" class="btn btn-outline btn-primary" value="{if $row.id}更新{else}添加{/if}" />
+												</div>
+											</td>
+										</tr>
+									</table>									
+								</div>
+							</form>
+							
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_friendlink_add"></script>
+	
 </body>
+
 </html>

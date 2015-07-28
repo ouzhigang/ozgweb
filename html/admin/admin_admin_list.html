@@ -1,37 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-<link href="../css/admin/style.css" rel="stylesheet" type="text/css" />
+	{include file="admin/_header.html"}
+	
+	<!-- DataTables CSS -->
+    <link href="../resources/{SB_ADMIN_2_PATH}/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" />
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../resources/{SB_ADMIN_2_PATH}/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet" />
+	
 </head>
 
 <body>
-<table width="45%">
-  <tr>
-    <td>
-	  <table width="100%" class="tableBorder" cellSpacing="0" cellPadding="0" align="center" border="0">
-	    <tr align="center">
-		  <th class="tableHeaderText" style="width:40%">用户名</th>
-          <th class="tableHeaderText" style="width:30%">添加日期</th>
-		  <th class="tableHeaderText" style="width:30%">操作</th>
-		</tr>
+    <div id="wrapper">
+		{include file="admin/_dialog.html"}
 		
-		{foreach from=$data item=v}
-		<tr onMouseOver="this.style.backgroundColor='E4E8EF'" onMouseOut="this.style.backgroundColor=''" class="t2" align="center">
-		  <td>{$v.name}</td>
-          <td>{'Y-m-d'|date:$v.add_time}</td>
-		  <td><a class="menu1" onClick="return confirm('确认删除');" href="?act=del&id={$v.id}">删除</a></td>
-		</tr>
-		{/foreach}
-	  </table>
-		
-	</td>
-  </tr>
-</table>
-<div align="center">
-<br />
-{$spent}
-</div>
+        <!-- Navigation -->        
+		{include file="admin/_admin_navbar.html"}
+
+        <div id="page-wrapper">
+            <!-- 内容部分 -->
+			
+			<div class="row" id="first_row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">管理员列表</div>
+                        <div class="panel-body">
+							
+							<div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>用户名</th>
+                                            <th>加入时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+										{foreach from=$data item=v}
+                                        <tr>
+                                            <td>
+												<h5>{$v.id}</h5>
+											</td>
+                                            <td>
+												<h5>{$v.name}</h5>
+											</td>
+                                            <td>
+												<h5>{$v.add_time}</h5>
+											</td>
+                                            <td>
+												<button type="button" class="btn btn-link" req-data="act=del&id={$v.id}">删除</button>
+											</td>
+                                        </tr>
+										{/foreach}
+                                    </tbody>
+                                </table>
+                            </div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_admin_list"></script>
+	
 </body>
+
 </html>

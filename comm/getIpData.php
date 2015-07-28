@@ -1,25 +1,25 @@
-<?php
+ï»¿<?php
 //===================================
 //
-// ¹¦ÄÜ£ºIPµØÖ·»ñÈ¡ÕæÊµµØÖ·º¯Êı
-// ²ÎÊı£º$ip - IPµØÖ·
-// ×÷Õß£º[Discuz!] (C) Comsenz Inc.
+// åŠŸèƒ½ï¼šIPåœ°å€è·å–çœŸå®åœ°å€å‡½æ•°
+// å‚æ•°ï¼š$ip - IPåœ°å€
+// ä½œè€…ï¼š[Discuz!] (C) Comsenz Inc.
 //
 //===================================
 function convertip($ip) {
-    //IPÊı¾İÎÄ¼şÂ·¾¶
+    //IPæ•°æ®æ–‡ä»¶è·¯å¾„
     $dat_path = 'QQWry.Dat';
 
-    //´ò¿ªIPÊı¾İÎÄ¼ş
-    if(!$fd = @fopen($dat_path, 'rb')){
+    //æ‰“å¼€IPæ•°æ®æ–‡ä»¶
+    if(!$fd = @fopen($dat_path, 'rb')) {
         return 'IP date file not exists or access denied';
     }
 
-    //·Ö½âIP½øĞĞÔËËã£¬µÃ³öÕûĞÎÊı
+    //åˆ†è§£IPè¿›è¡Œè¿ç®—ï¼Œå¾—å‡ºæ•´å½¢æ•°
     $ip = explode('.', $ip);
     $ipNum = $ip[0] * 16777216 + $ip[1] * 65536 + $ip[2] * 256 + $ip[3];
 
-    //»ñÈ¡IPÊı¾İË÷Òı¿ªÊ¼ºÍ½áÊøÎ»ÖÃ
+    //è·å–IPæ•°æ®ç´¢å¼•å¼€å§‹å’Œç»“æŸä½ç½®
     $DataBegin = fread($fd, 4);
     $DataEnd = fread($fd, 4);
     $ipbegin = implode('', unpack('L', $DataBegin));
@@ -31,28 +31,28 @@ function convertip($ip) {
     $BeginNum = 0;
     $EndNum = $ipAllNum;
 
-    //Ê¹ÓÃ¶ş·Ö²éÕÒ·¨´ÓË÷Òı¼ÇÂ¼ÖĞËÑË÷Æ¥ÅäµÄIP¼ÇÂ¼
+    //ä½¿ç”¨äºŒåˆ†æŸ¥æ‰¾æ³•ä»ç´¢å¼•è®°å½•ä¸­æœç´¢åŒ¹é…çš„IPè®°å½•
     while($ip1num>$ipNum || $ip2num<$ipNum) {
         $Middle= intval(($EndNum + $BeginNum) / 2);
 
-        //Æ«ÒÆÖ¸Õëµ½Ë÷ÒıÎ»ÖÃ¶ÁÈ¡4¸ö×Ö½Ú
+        //åç§»æŒ‡é’ˆåˆ°ç´¢å¼•ä½ç½®è¯»å–4ä¸ªå­—èŠ‚
         fseek($fd, $ipbegin + 7 * $Middle);
         $ipData1 = fread($fd, 4);
         if(strlen($ipData1) < 4) {
             fclose($fd);
             return 'System Error';
         }
-        //ÌáÈ¡³öÀ´µÄÊı¾İ×ª»»³É³¤ÕûĞÎ£¬Èç¹ûÊı¾İÊÇ¸ºÊıÔò¼ÓÉÏ2µÄ32´ÎÃİ
+        //æå–å‡ºæ¥çš„æ•°æ®è½¬æ¢æˆé•¿æ•´å½¢ï¼Œå¦‚æœæ•°æ®æ˜¯è´Ÿæ•°åˆ™åŠ ä¸Š2çš„32æ¬¡å¹‚
         $ip1num = implode('', unpack('L', $ipData1));
         if($ip1num < 0) $ip1num += pow(2, 32);
         
-        //ÌáÈ¡µÄ³¤ÕûĞÍÊı´óÓÚÎÒÃÇIPµØÖ·ÔòĞŞ¸Ä½áÊøÎ»ÖÃ½øĞĞÏÂÒ»´ÎÑ­»·
+        //æå–çš„é•¿æ•´å‹æ•°å¤§äºæˆ‘ä»¬IPåœ°å€åˆ™ä¿®æ”¹ç»“æŸä½ç½®è¿›è¡Œä¸‹ä¸€æ¬¡å¾ªç¯
         if($ip1num > $ipNum) {
             $EndNum = $Middle;
             continue;
         }
         
-        //È¡ÍêÉÏÒ»¸öË÷ÒıºóÈ¡ÏÂÒ»¸öË÷Òı
+        //å–å®Œä¸Šä¸€ä¸ªç´¢å¼•åå–ä¸‹ä¸€ä¸ªç´¢å¼•
         $DataSeek = fread($fd, 3);
         if(strlen($DataSeek) < 3) {
             fclose($fd);
@@ -68,7 +68,7 @@ function convertip($ip) {
         $ip2num = implode('', unpack('L', $ipData2));
         if($ip2num < 0) $ip2num += pow(2, 32);
 
-        //Ã»ÕÒµ½ÌáÊ¾Î´Öª
+        //æ²¡æ‰¾åˆ°æç¤ºæœªçŸ¥
         if($ip2num < $ipNum) {
             if($Middle == $BeginNum) {
                 fclose($fd);
@@ -78,7 +78,7 @@ function convertip($ip) {
         }
     }
 
-    //ÏÂÃæµÄ´úÂë¶ÁÔÎÁË£¬Ã»¶ÁÃ÷°×£¬ÓĞĞËÈ¤µÄÂıÂı¶Á
+    //ä¸‹é¢çš„ä»£ç è¯»æ™•äº†ï¼Œæ²¡è¯»æ˜ç™½ï¼Œæœ‰å…´è¶£çš„æ…¢æ…¢è¯»
     $ipFlag = fread($fd, 1);
     if($ipFlag == chr(1)) {
         $ipSeek = fread($fd, 3);
@@ -141,7 +141,7 @@ function convertip($ip) {
     }
     fclose($fd);
 
-    //×îºó×öÏàÓ¦µÄÌæ»»²Ù×÷ºó·µ»Ø½á¹û
+    //æœ€ååšç›¸åº”çš„æ›¿æ¢æ“ä½œåè¿”å›ç»“æœ
     if(preg_match('/http/i', $ipAddr2)) {
         $ipAddr2 = '';
     }
@@ -159,7 +159,7 @@ function convertip($ip) {
 
 //========================
 //
-//  µ÷ÓÃ¾ÙÀı£¨ËÙ¶ÈºÜ¿ì£©
+//  è°ƒç”¨ä¸¾ä¾‹ï¼ˆé€Ÿåº¦å¾ˆå¿«ï¼‰
 //
 //========================
 
