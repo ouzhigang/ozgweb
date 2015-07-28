@@ -1,15 +1,20 @@
-ckeditor需要自行下载，对应目录/ozgweb/ckeditor/，在/ozgweb/ckeditor/config.js的CKEDITOR.editorConfig里面加入config.filebrowserImageUploadUrl = "upload.php?act=ckupload";
-
-
-================
-
-
-sb-admin2需要自行下载，https://github.com/IronSummitMedia/startbootstrap-sb-admin-2 ，对应目录/ozgweb/resources/startbootstrap-sb-admin-2-1.0.7/
-
-在php.ini设置一个include_path路径，将ez_sql和smarty复制进去。
+ckeditor需要自行下载，然后放到/ozgweb/ckeditor/，在/ozgweb/ckeditor/config.js的CKEDITOR.editorConfig里面加入config.filebrowserImageUploadUrl = "upload.php?act=ckupload";
 
 ================
 
+默认网站目录为/ozgweb/，改变网站目录的话需要修改config.php中的WEB_PATH
+
+================
+
+后台路径是/ozgweb/admin，用户密码都是admin
+
+================
+
+默认使用的数据库为sqlite3，路径为/ozgweb/ozgweb.php
+
+修改config.php的对应位置可改为mysql
+
+================
 
 建立目录：
 
@@ -19,16 +24,6 @@ sb-admin2需要自行下载，https://github.com/IronSummitMedia/startbootstrap-
 
 /ozgweb/smarty/templates_c/
 
+/ozgweb/smarty/templates
+
 /ozgweb/upload/
-
-
-================
-
-
-默认网站目录为/ozgweb/，改变网站目录的话需要修改config.php中的WEB_PATH
-
-
-================
-
-
-后台路径是/ozgweb/admin，用户密码都是admin

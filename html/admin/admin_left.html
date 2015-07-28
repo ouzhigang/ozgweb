@@ -1,0 +1,110 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题页</title>
+    <SCRIPT src="menu/menu.js"></SCRIPT>
+</head>
+<body>
+{literal}
+<SCRIPT>
+var taskMenuSystem;
+var taskMenuVersion;
+var taskMenu1;
+var taskMenu2;
+var taskMenu10;
+var taskMenu15;
+
+TaskMenu.setStyle("menu/style.css"); 
+
+window.onload = function()
+{
+	TaskMenu.setHeadMenuSpecial(true);
+	//TaskMenu.setScrollbarEnabled(true);
+	//TaskMenu.setAutoBehavior(false);
+	////////////////////////////////////////////////
+	
+	//二级菜单
+	var item1_1 = new TaskMenuItem ('添加分类', 'menu/home.gif', "parent.window.frames[2].location.href='admin_dataclass.php?act=add&type=1'");
+	var item1_2 = new TaskMenuItem ('分类管理', 'menu/hr.gif', "parent.window.frames[2].location.href='admin_dataclass.php?type=1'");
+	var item1_3 = new TaskMenuItem ('添加文章', 'menu/js.gif', "parent.window.frames[2].location.href='admin_data.php?act=add&type=1'");
+	var item1_4 = new TaskMenuItem ('文章管理', 'menu/pass.gif', "parent.window.frames[2].location.href='admin_data.php?type=1'");		
+	
+	var item2_1 = new TaskMenuItem ('添加分类', 'menu/home.gif', "parent.window.frames[2].location.href='admin_dataclass.php?act=add&type=2'");
+	var item2_2 = new TaskMenuItem ('分类管理', 'menu/hr.gif', "parent.window.frames[2].location.href='admin_dataclass.php?type=2'");
+	var item2_3 = new TaskMenuItem ('添加标题', 'menu/js.gif', "parent.window.frames[2].location.href='admin_data.php?act=add&type=2'");
+	var item2_4 = new TaskMenuItem ('标题管理', 'menu/pass.gif', "parent.window.frames[2].location.href='admin_data.php?type=2'");		
+	
+	var item5_1 = new TaskMenuItem ('留言管理', 'menu/hr.gif', "parent.window.frames[2].location.href='admin_guest_list.php'");	
+	var item5_2 = new TaskMenuItem ('关于我们', 'menu/js.gif', "parent.window.frames[2].location.href='admin_articlesingle.php?id=1'");
+    
+	var item20_1 = new TaskMenuItem ('连接管理', 'menu/list.gif', "parent.window.frames[2].location.href='admin_friendlink.php'");
+    var item20_2 = new TaskMenuItem ('添加连接', 'menu/hr_yp.gif', "parent.window.frames[2].location.href='admin_friendlink.php?act=add'");
+	
+	var item21_1 = new TaskMenuItem ('菜单管理', 'menu/list.gif', "parent.window.frames[2].location.href='admin_qqmenu.php'");
+    var item21_2 = new TaskMenuItem ('添加菜单', 'menu/hr_yp.gif', "parent.window.frames[2].location.href='admin_qqmenu.php?act=add'");
+	
+	var item22_1 = new TaskMenuItem ('导航管理', 'menu/list.gif', "parent.window.frames[2].location.href='admin_navigation.php'");
+    var item22_2 = new TaskMenuItem ('添加导航', 'menu/hr_yp.gif', "parent.window.frames[2].location.href='admin_navigation.php?act=add'");
+	
+	var item23_1 = new TaskMenuItem ('Banner相关', 'menu/gd.gif', "parent.window.frames[2].location.href='admin_banner.php'");
+		
+	var itemS_1 = new TaskMenuItem("修改密码", "menu/pass.gif", "parent.window.frames[2].location.href='admin_admin.php?act=pwd'");
+	var itemS_2 = new TaskMenuItem("用户管理", "menu/friends.gif", "parent.window.frames[2].location.href='admin_admin.php'");
+    var itemS_3 = new TaskMenuItem("添加用户", "menu/hr.gif", "parent.window.frames[2].location.href='admin_admin.php?act=add'");	
+	//
+	var itemV_2 = new TaskMenuItem();
+	itemV_2.setLabel("程序开发: <a target='_blank' href='https://github.com/ouzhigang/ozgweb'>OZG GitHub</a>");
+	
+	//一级菜单
+	var taskMenu1 = new TaskMenu("文章管理", false);
+	taskMenu1.add(item1_1);
+	taskMenu1.add(item1_2);
+	taskMenu1.add(item1_3);
+	taskMenu1.add(item1_4);
+	taskMenu1.init();
+	
+	var taskMenu2 = new TaskMenu("图片管理", false);
+	taskMenu2.add(item2_1);
+	taskMenu2.add(item2_2);
+	taskMenu2.add(item2_3);
+	taskMenu2.add(item2_4);
+	taskMenu2.init();
+	
+	var taskMenu5 = new TaskMenu("区域管理", false);
+	//taskMenu5.add(item5_1);
+	taskMenu5.add(item5_2);
+	taskMenu5.init();	
+	
+	var taskMenu20 = new TaskMenu("友情链接", false);
+	taskMenu20.add(item20_1);
+	taskMenu20.add(item20_2);
+	taskMenu20.init();	
+	
+	var taskMenu21 = new TaskMenu("QQ浮动菜单", false);
+	taskMenu21.add(item21_1);
+	taskMenu21.add(item21_2);
+	taskMenu21.init();	
+	
+	var taskMenu22 = new TaskMenu("首页导航", false);
+	taskMenu22.add(item22_1);
+	taskMenu22.add(item22_2);
+	taskMenu22.init();	
+	
+	var taskMenu23 = new TaskMenu("其他相关", false);
+	taskMenu23.add(item23_1);
+	taskMenu23.init();	
+	
+	var taskMenuSystem = new TaskMenu("用户管理", false);
+	taskMenuSystem.add(itemS_1);
+	taskMenuSystem.add(itemS_2);
+	taskMenuSystem.add(itemS_3);
+	taskMenuSystem.init();
+	
+	var taskMenuVersion = new TaskMenu("开发信息", false);
+	taskMenuVersion.add(itemV_2);
+	taskMenuVersion.init();
+}
+</SCRIPT>
+{/literal}
+</body>
+</html>

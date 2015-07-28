@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$js_jquery}"></script>
+<script type="text/javascript" src="../js/utility.js"></script>
+</head>
+
+<body>
+<form name="form1" method="post" action="?act=add">
+<table class="tableBorder" cellSpacing="0" cellPadding="0" width="70%" border="0">
+  <tr>
+    <th colspan="2" class="tableHeaderText">QQ浮动菜单</th>
+  </tr>
+  <tr>
+    <td align="right">名称:</td>
+    <td>
+	  <input name="name" type="text" style="width:300px" value="{$row.name}" />
+	</td>
+  </tr>
+  <tr>
+    <td align="right">排序:</td>
+    <td>
+	  <input name="sort" type="text" style="width:300px" value="{$row.sort}" onKeyUp="if(isNaN(value))execCommand('undo')" />
+	</td>
+  </tr>
+  <tr>
+    <td align="right">QQ号码:</td>
+    <td>
+	  <input name="qq" type="text" style="width:300px" value="{$row.qq}" />
+	</td>
+  </tr>  
+  <tr>
+    <td align="right">IDKEY:</td>
+    <td>
+	  <input name="idkey" type="text" style="width:300px" value="{$row.idkey}" />
+      此项为空则为"完全公开"模式，非空则为"安全加密"
+	</td>
+  </tr>  
+  <tr style="display:none">
+    <td align="right">显示图标:</td>
+  	<td>
+    	<table style="width:75%">
+        	<tr>
+            	<td>
+                	<label><input type="radio" name="pic" value="41" /><img src="../images/QQMenu/Admin/41.jpg" /></label>
+                </td>
+                <td>
+                	<label><input type="radio" name="pic" value="42" /><img src="../images/QQMenu/Admin/42.jpg" /></label>
+                </td>
+                <td>
+                	<label><input type="radio" name="pic" value="43" /><img src="../images/QQMenu/Admin/43.jpg" /></label>
+                </td>
+            </tr>
+            <tr>
+            	<td>
+                	<label><input type="radio" name="pic" value="44" /><img src="../images/QQMenu/Admin/44.jpg" /></label>
+                </td>
+                <td>
+                	<label><input type="radio" name="pic" value="45" /><img src="../images/QQMenu/Admin/45.jpg" /></label>
+                </td>
+                <td>
+                	<label><input type="radio" name="pic" value="46" /><img src="../images/QQMenu/Admin/46.jpg" /></label>
+                </td>
+            </tr>
+            <tr>
+            	<td>
+                	<label><input type="radio" name="pic" value="47" /><img src="../images/QQMenu/Admin/47.jpg" /></label>
+                </td>
+                <td>
+                	<label><input type="radio" name="pic" value="48" /><img src="../images/QQMenu/Admin/48.jpg" /></label>
+                </td>
+                <td>
+                	<label><input type="radio" name="pic" value="49" /><img src="../images/QQMenu/Admin/49.jpg" /></label>
+                </td>
+            </tr>
+            <tr>
+            	<td>
+                	<label><input type="radio" name="pic" value="50" /><img src="../images/QQMenu/Admin/50.jpg" /></label>
+                </td>
+                <td>
+                	
+                </td>
+                <td>
+                	
+                </td>
+            </tr>
+        </table>   
+        
+    </td>
+  </tr>
+  <tr align="center">
+    <td colspan="2">
+      <input name="id" type="hidden" value="{$row.id}" /> 
+	  <input name="提交" type="submit" value="提交" /> 
+	  <input value="后退" type="button" onClick="history.back()" />
+	</td>
+  </tr>
+</table>
+</form>
+</body>
+</html>
