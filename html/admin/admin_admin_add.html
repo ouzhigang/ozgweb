@@ -1,66 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-<link href="../css/admin/style.css" rel="stylesheet" type="text/css" />
-{literal}
-<script type="text/javascript">
-function onSubmit(){
-	var msg = "";
-	if(document.getElementById("name").value == ""){
-		msg += "用户名不能为空\r\n";
-	}
-	if(document.getElementById("pwd").value == ""){
-		msg += "密码不能为空\r\n";
-	}
-	else{
-		if(document.getElementById("pwd").value != document.getElementById("pwd2").value){
-			msg += "第二次输入密码不正确\r\n";
-		}
-	}
+	{include file="admin/_header.html"}
 	
-	if(msg == ""){
-		return true;	
-	}
-	else{
-		alert(msg);
-		return false;	
-	}
-}
-</script>
-{/literal}
+	<link href="../resources/css/{WEBPATH_ADMIN}/admin_admin_add.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-<form name="form1" method="post" action="?act=add" onSubmit="return onSubmit()">
+    <div id="wrapper">
+		{include file="admin/_dialog.html"}
+		
+        <!-- Navigation -->        
+		{include file="admin/_admin_navbar.html"}
 
-<table class="tableBorder" cellSpacing="0" cellPadding="0" width="550" border="0">
-  <tr>
-    <th class="tableHeaderText">添加管理员</th>
-  </tr>
-  <tr>
-    <td>
-	  &nbsp;&nbsp;用户名: <input name="name" id="name" type="text" class="MultiLineText" style="width:200px" />
-	</td>
-  </tr>
-  <tr>
-    <td>
-	  &nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;码: <input name="pwd" id="pwd" type="password" class="MultiLineText" style="width:200px" />
-	</td>
-  </tr>
-  <tr>
-    <td>
-	  &nbsp;&nbsp;确&nbsp;&nbsp;&nbsp;认: <input name="pwd2" id="pwd2" type="password" class="MultiLineText" style="width:200px" />
-	</td>
-  </tr>
+        <div id="page-wrapper">
+            <!-- 内容部分 -->
+			
+			<div class="row" id="first_row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">添加管理员</div>
+                        <div class="panel-body">
+                            
+							<form id="main_form" role="form">
+								<div class="form-group">
+									<table>
+										<tr>
+											<td class="title_column">
+												<label>用户名：</label>
+											</td>
+											<td>
+												<input class="form-control" placeholder="请输入用户名" id="name" name="name" />												
+											</td>
+										</tr>
+										<tr>
+											<td class="title_column">
+												<label>密码：</label>
+											</td>
+											<td>
+												<input class="form-control" placeholder="请输入密码" type="password" id="pwd" name="pwd" />
+											</td>
+										</tr>
+										<tr>
+											<td class="title_column">
+												<label>确认密码：</label>
+											</td>
+											<td>
+												<input class="form-control" placeholder="请输入确认密码" type="password" id="pwd2" name="pwd2" />
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<div class="btn_submit_div">
+													<input type="submit" id="btn_submit" class="btn btn-outline btn-primary" value="添加" />
+												</div>
+											</td>
+										</tr>
+									</table>									
+								</div>
+							</form>
+							
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+        </div>
+        <!-- /#page-wrapper -->
 
-  <tr>
-    <td align="center">
-	  <input name="Submit" type="submit" class="buttonface" value="添加" />&nbsp;&nbsp;<input name="Submit" type="reset" class="buttonface" />
-	</td>
-  </tr>
-</table>
-</form>
+    </div>
+    <!-- /#wrapper -->
+	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_admin_add"></script>
+	
 </body>
+
 </html>
