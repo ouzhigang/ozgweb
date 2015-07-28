@@ -1,0 +1,171 @@
+BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; SCROLLBAR-FACE-COLOR: #c7d4f7; FONT-SIZE: 12px; BACKGROUND: #ced7f7; PADDING-BOTTOM: 0px; MARGIN: 0px; SCROLLBAR-HIGHLIGHT-COLOR: #dee6fa; SCROLLBAR-SHADOW-COLOR: #799ae1; SCROLLBAR-3DLIGHT-COLOR: #dee6fa; SCROLLBAR-ARROW-COLOR: #fff; PADDING-TOP: 0px; SCROLLBAR-TRACK-COLOR: #e4edf9; FONT-FAMILY: "ËÎÌå", "Verdana", "Arial"; SCROLLBAR-DARKSHADOW-COLOR: #dee6fa
+}
+TD {
+	FONT-SIZE: 12px
+}
+INPUT {
+	BORDER-RIGHT: #7f9db9 1px solid; BORDER-TOP: #7f9db9 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #7f9db9 1px solid; BORDER-BOTTOM: #7f9db9 1px solid; BACKGROUND-COLOR: #f8f8f8
+}
+.checkbox {
+	WIDTH: 14px; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; HEIGHT: 14px; BORDER-BOTTOM-STYLE: none
+}
+FIELDSET {
+	BORDER-RIGHT: #c8d9e4 1px solid; BORDER-TOP: #c8d9e4 1px solid; BORDER-LEFT: #c8d9e4 1px solid; BORDER-BOTTOM: #c8d9e4 1px solid
+}
+LEGEND {
+	FONT-WEIGHT: bold; COLOR: #000
+}
+FORM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+SELECT {
+	FONT-SIZE: 12px
+}
+TEXTAREA {
+	FONT-SIZE: 12px
+}
+SPAN {
+	FONT-SIZE: 12px; POSITION: static
+}
+.button {
+	FONT: bold 11px tahoma,verdana,arial,helvetica,sans-serif
+}
+A:link {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #428eff; TEXT-DECORATION: underline
+}
+A.highlight:link {
+	COLOR: red; TEXT-DECORATION: none
+}
+A.highlight:visited {
+	COLOR: red; TEXT-DECORATION: none
+}
+A.highlight:hover {
+	COLOR: red
+}
+A.thisclass:link {
+	FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.thisclass:visited {
+	FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+A.thisclass:hover {
+	FONT-WEIGHT: bold
+}
+A.navlink:link {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A.navlink:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A.navlink:hover {
+	COLOR: #003399; TEXT-DECORATION: none
+}
+.twidth {
+	WIDTH: 760px
+}
+.content {
+	FONT-SIZE: 14px; MARGIN: 5px 20px; LINE-HEIGHT: 140%; FONT-FAMILY: Tahoma,å®‹ä½“
+}
+.aTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 15px
+}
+TD.forumHeaderBackgroundAlternate {
+	BACKGROUND-IMAGE: url(admin_top_bg.gif); COLOR: #000000; BACKGROUND-COLOR: #799ae1
+}
+#TableTitleLink A:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+#TableTitleLink A:visited {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+#TableTitleLink A:active {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+#TableTitleLink A:hover {
+	COLOR: #ffffff; TEXT-DECORATION: underline
+}
+TH {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; BACKGROUND-IMAGE: url(admin_bg_1.gif); COLOR: white; HEIGHT: 25px; BACKGROUND-COLOR: #4455aa
+}
+TD.bodytitle {
+	BACKGROUND-IMAGE: url(admin_bg_2.gif)
+}
+TD.bodytitle1 {
+	BACKGROUND-IMAGE: url(admin_bg_3.gif)
+}
+TD.tablebody1 {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 3px; BACKGROUND: #bebbdb; PADDING-BOTTOM: 3px; PADDING-TOP: 3px
+}
+TD.forumRow {
+	BACKGROUND: #f1f3f5; PADDING-BOTTOM: 3px; PADDING-TOP: 3px
+}
+TD.forumRowHighlight {
+	BACKGROUND: #e4edf9; PADDING-BOTTOM: 3px; PADDING-TOP: 3px
+}
+.tableBorder {
+	BORDER-RIGHT: #183789 1px solid; BORDER-TOP: #183789 1px solid; BORDER-LEFT: #183789 1px solid; BORDER-BOTTOM: #183789 1px solid; BACKGROUND-COLOR: #ffffff
+}
+.editTable {
+	BORDER-RIGHT: #183789 1px solid; BORDER-TOP: #183789 1px solid; BORDER-LEFT: #183789 1px solid; BORDER-BOTTOM: #183789 1px solid; BACKGROUND-COLOR: #ffffff
+}
+.editTable {
+	WIDTH: 98%; COLOR: #800000; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #fff
+}
+.editTable .tips {
+	COLOR: #000
+}
+.TableFooter {
+	BORDER-RIGHT: #183789 1px solid; FONT: 11px tahoma,verdana,arial,helvetica,sans-serif; BORDER-LEFT: #183789 1px solid; COLOR: #001f30; BORDER-BOTTOM: #183789 1px solid; BACKGROUND-COLOR: #dee0e2
+}
+.TableFooter TD {
+	TEXT-ALIGN: right
+}
+.pager {
+	BORDER-RIGHT: #1c6eac 1px solid; BORDER-TOP: #1c6eac 1px solid; FLOAT: right; MARGIN: 2px; BORDER-LEFT: #1c6eac 1px solid; WIDTH: auto; BORDER-BOTTOM: #1c6eac 1px solid; BACKGROUND-COLOR: #d6e0ef
+}
+.pager TD {
+	LINE-HEIGHT: normal; BACKGROUND-COLOR: #ffffff
+}
+.pager TD.pagerTitle {
+	CLEAR: both; COLOR: #ffffff; BACKGROUND-COLOR: #1c6eac
+}
+.pager TD.current {
+	COLOR: #f00
+}
+.pager A {
+	FONT-SIZE: 12px; COLOR: #333; TEXT-DECORATION: none
+}
+.pager A:hover {
+	FONT-SIZE: 12px; COLOR: #ff3300; TEXT-DECORATION: underline
+}
+.tableBorder TR {
+	HEIGHT: 22px
+}
+.TableFooter TR {
+	HEIGHT: 22px
+}
+.tableBorder1 {
+	WIDTH: 98%
+}
+.helplink {
+	FONT: 10px verdana,arial,helvetica,sans-serif; CURSOR: help; TEXT-DECORATION: none
+}
+.copyright {
+	FONT: bolder 11px verdana,arial,Tahoma; COLOR: #c0cad1; PADDING-TOP: 1px
+}
+.copyright1 {
+	PADDING-RIGHT: 1px; BORDER-TOP: #6595d6 1px dashed; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; FONT: 11px verdana,arial,helvetica,sans-serif; COLOR: #4455aa; PADDING-TOP: 1px; TEXT-DECORATION: none
+}
+.tablefoot {
+	BORDER-RIGHT: 1px outset; BORDER-TOP: 1px outset; FONT: 11px tahoma,verdana,arial,helvetica,sans-serif; BORDER-LEFT: 1px outset; COLOR: #001f30; BORDER-BOTTOM: 1px outset; BACKGROUND-COLOR: #dee0e2
+}
+.tdfoot {
+	FONT: 11px verdana,arial,Tahoma; COLOR: #001f30
+}

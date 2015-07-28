@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="{$js_jquery}"></script>
+{literal}<script>
+	$(function() {
+		CKEDITOR.replace('content');
+	});
+</script>{/literal}
+</head>
+
+<body>
+<form name="form1" id="form1" method="post" action="?act=update&id={$row.id}">
+<table class="tableBorder" cellSpacing="0" cellPadding="0" border="0">
+  <tr>
+    <TH class="tableHeaderText">{$row.name}</TH>
+  </tr>
+  <tr>
+    <td>
+	  <textarea name="content" id="content">
+      	{$row.content}
+      </textarea>
+	</td>
+  </tr>
+  <tr align="center">
+    <td>
+	  <input name="提交" type="submit" value="提交" /> 
+	  <input value="后退" type="button" onClick="history.back()" />
+	</td>
+  </tr>
+</table>
+</form>
+<div align="center">
+<br>
+{$spent}
+</div>
+</body>
+</html>
