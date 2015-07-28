@@ -1,16 +1,14 @@
 <?php
 require("config.php");
-
-//这里的引用来自php.ini的公用include
-require("ez_sql/ez_sql_core.php");
-require("ez_sql/ez_sql_pdo.php");
-require("smarty/Smarty.class.php");
-
-require("comm/class/SqlText.php");
-require("comm/class/Page.php");
-require("comm/class/Runtime.php");
+require("comm/class/ez_sql/ez_sql_core.php");
+require("comm/class/ez_sql/ez_sql_pdo.php");
+require("comm/class/SqlText.class.php");
+require("comm/class/Page.class.php");
+require("comm/class/runtime.class.php");
+require("comm/class/FileUtil.class.php");
+require("comm/class/smarty/Smarty.class.php");
+require("comm/class/Snoopy.class.php");
 require("comm/functions.php");
-require("comm/share.php");
 
 $curr_file_name = strtolower(self());
 
@@ -34,6 +32,8 @@ $page->firstText = "首页";
 $page->prevText = "上一页";
 $page->nextText = "下一页";
 $page->lastText = "末页";
+
+//header("Content-Type:text/html; charset=" . constant("WEB_CHARSET"));
 
 $novalid = array();
 $novalid[] = "admin_articlesingle.php";

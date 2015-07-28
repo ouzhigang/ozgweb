@@ -1,88 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	{include file="admin/_header.html"}
-	
-	<!-- DataTables CSS -->
-    <link href="../resources/{SB_ADMIN_2_PATH}/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/utility.js"></script>
+{literal}
+<script type="text/javascript">
+function del()
+{
+	if(confirm('确认删除'))
+	{
+		var form1 = document.getElementById("form1");
+		var del = document.getElementById("del");
+		var str = "";
+		for (var i = 0 ; i < form1.elements.length ; i++)
+		{
+			var e = form1.elements[i];
+			if(e.type == "checkbox" && e.name.split("_")[0] == "chk")
+			{
+				if(e.checked)
+				{
+					str += e.value;
+					
+					if(i + 1 <= form1.elements.length){
+						str += ",";	
+					}
+				}
+			}
+		}
+		if(str.charAt(str.length - 1) == ","){
+			str = str.substring(0 , str.length - 1);
+		}
+		//alert(str);return;
+		del.value = str;
+				
+		form1.submit();
+	}
+}
 
-    <!-- DataTables Responsive CSS -->
-    <link href="../resources/{SB_ADMIN_2_PATH}/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet" />
-	
-	<link href="../resources/css/{WEBPATH_ADMIN}/admin_friendlink_list.css" rel="stylesheet" type="text/css" />
+function checkAll(obj){
+	for (var i = 0 ; i < form1.elements.length ; i++)
+	{
+		var e = form1.elements[i];
+		if(e.type == "checkbox" && e.name.split("_")[0] == "chk")
+		{
+			e.checked = obj.checked;
+		}
+	}
+}
+</script>
+{/literal}
 </head>
 
 <body>
-    <div id="wrapper">
-		{include file="admin/_dialog.html"}
+<form name="form1" id="form1" action="del_all.php?t={$table}&url={$self}" method="post">
+<table width="450" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+	  
+	  <table width="100%" class="tableBorder" cellSpacing="0" cellPadding="0" align="center" border="0">
+	    <tr align="center">
+		  <th class="tableHeaderText" width="45%" height="20px">连接名称</th>
+		  <th class="tableHeaderText" width="30%">连接图片</th>
+		  <th class="tableHeaderText" width="25%">操作 / <a href="javascript:del();">删除</a> <input id="chk" type="checkbox" onClick="checkAll(this)" /><input id="del" name="del" type="hidden" /></th>
+		</tr>
+		{foreach from=$data item=v}
+		<tr onMouseOver="this.style.backgroundColor='E4E8EF'" onMouseOut="this.style.backgroundColor=''" class="t2" height="31px">
+		  <td align="left">&nbsp;&nbsp;<a target="_blank" href="{$v.url}">{$v.name}</a></td>
+		  <td align="center">
+          	{if $v.is_picture}
+            	<img height="31" width="88" src="{$v.picture}" />
+            {else}
+            	[文字链接]
+            {/if}
+		  </td>
+		  <td align="center"><a href="admin_friendlink.php?act=add&id={$v.id}">编辑</a> <a  onClick="return confirm('确认删除');" href="?act=del&id={$v.id}">删除</a> <input name="chk_{$v.id}' />" type="checkbox" value='{$v.id}' /></td>
+		</tr>
+		{/foreach}
+	  </table>
 		
-        <!-- Navigation -->        
-		{include file="admin/_admin_navbar.html"}
-
-        <div id="page-wrapper">
-            <!-- 内容部分 -->
-			
-			<div class="row" id="first_row">
-                <div class="col-lg-10">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-							友情链接列表 
-							<button class="btn btn-outline btn-default" type="button" id="btnadd">添加</button>
-						</div>
-                        <div class="panel-body">
-							
-							<div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>网站</th>
-                                            <th>链接</th>
-											<th>LOGO</th>
-                                            <th>操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-										{foreach from=$data item=v}
-                                        <tr>
-                                            <td>
-												<h5>{$v.id}</h5>
-											</td>
-                                            <td>
-												<h5>{$v.name}</h5>
-											</td>
-                                            <td>
-												<h5>{$v.url}</h5>
-											</td>
-											<td>
-												{if $v.is_picture}
-												<img src="https://www.baidu.com/img/bd_logo1.png" width="88px" height="31px" />
-												{else}
-												无
-												{/if}												
-											</td>
-                                            <td>
-												<button type="button" class="btn btn-link" req-data="act=add&id={$v.id}" id="btnedit_{$v.id}">编辑</button>
-												<button type="button" class="btn btn-link" req-data="act=del&id={$v.id}" id="btndel_{$v.id}">删除</button>
-											</td>
-                                        </tr>
-										{/foreach}
-                                    </tbody>
-                                </table>
-                            </div>
-							
-						</div>
-					</div>
-				</div>
-			</div>
-			
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-	<script src="http://libs.useso.com/js/require.js/2.1.9/require.min.js" data-main="../resources/js/{WEBPATH_ADMIN}/admin_friendlink_list"></script>
-	
+	</td>
+  </tr>
+</table>
+</form>
+<div align="center">
+<br>
+{$spent}
+</div>
 </body>
-
 </html>

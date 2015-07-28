@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$js_jquery}"></script>
+<script type="text/javascript" src="../js/utility.js"></script>
+{literal}
+<script type="text/javascript">
+$(function(){
+	{/literal}{if $row.id}{literal}
+	checkedRadio('target','{/literal}{$row.target}{literal}');
+	{/literal}{else}{literal}
+	checkedRadio('target','_self');
+	{/literal}{/if}{literal}
+});
+
+//选定一个单选
+//单选的name
+//单选的value
+function checkedRadio(name , val){	
+	var RadioList = document.getElementsByName(name);
+	for(var i = 0 ; i < RadioList.length ; i++){
+		if(RadioList.item(i).value == val){
+			RadioList.item(i).checked = true;
+			break;	
+		}
+	}
+}
+</script>
+{/literal}
+</head>
+
+<body>
+<form name="form1" method="post" action="?act=add">
+<table class="tableBorder" cellSpacing="0" cellPadding="0" width="60%" border="0">
+  <tr>
+    <th colspan="2" class="tableHeaderText">首页导航</th>
+  </tr>
+  <tr>
+    <td align="right">名称:</td>
+    <td>
+	  <input name="name" type="text" style="width:300px" value="{$row.name}" />
+	</td>
+  </tr>
+  <tr>
+    <td align="right">排序:</td>
+    <td>
+	  <input name="sort" type="text" style="width:300px" value="{$row.sort}" onKeyUp="if(isNaN(value))execCommand('undo')" />
+	</td>
+  </tr>
+  <tr>
+    <td align="right">目标URL:</td>
+    <td>
+	  <input name="url" type="text" style="width:300px" value="{$row.url}" />
+	</td>
+  </tr>
+  <tr>
+    <td align="right">打开方式:</td>
+    <td>
+	  <label><input name="target" type="radio" value="_self" />_self</label>
+      <label><input name="target" type="radio" value="_blank" />_blank</label>
+	</td>
+  </tr>  
+  <tr align="center">
+    <td colspan="2">
+      <input name="id" type="hidden" value="{$row.id}" /> 
+	  <input name="提交" type="submit" value="提交" /> 
+	  <input value="后退" type="button" onClick="history.back()" />
+	</td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

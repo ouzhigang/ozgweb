@@ -1,85 +1,84 @@
 <?php
 require('init.php');
 
-$act = isset($_REQUEST["act"]) ?  $_REQUEST["act"] : "list";
+$act = $_GET["act"] ?  $_GET["act"] : "show";
 
-if($act == "list") {
-	$sql = "select * from user order by id asc";
+if($act == "show") {
+	$runtime->start();
+	$table = constant('DB_PREFIX') . "admin";
+	$order = "id asc";
+	$sql = "select * from " . $table . " order by " . $order;
 	$data = $db->get_results($sql, ARRAY_A);
-	
-	foreach($data as &$v) {
-		$v["add_time"] = date("Y-m-d H:i:s", $v["add_time"]);
-	}
-	
 	$smarty->assign('data', $data);
+	$runtime->stop();
+	$smarty->assign('spent', "页面执行时间: " . $runtime->spent() . " 毫秒");
 	$smarty->display('admin/admin_admin_list.html');
 }
 elseif($act == "add") {
-		
+	if($_POST) {
+		$name = str_filter($_POST["name"]);
+		$pwd = str_filter($_POST["pwd"]);
+		$pwd2 = str_filter($_POST["pwd2"]);
+		if($pwd == $pwd2) {
+			$table = constant('DB_PREFIX') . "admin";
+			$result = $db->get_var("select count(id) from " . $table . " where name='" . $name . "'");
+			if($result) {
+				msg_box("此用户已存在");
+			}
+			
+			$list["name"] = $name;
+			$list["pwd"] = md5($pwd);
+			$list["add_time"] = time();
+			$sql = SqlText::insert($table, $list);	
+			$db->query($sql);
+			msg_box("添加成功！", "admin_admin.php");
+		}
+		else {
+			msg_box("第二次输入密码不正确");
+		}
+	}
+	
 	$smarty->display('admin/admin_admin_add.html');
 }
-elseif($act == "addsubmit") {
-	$name = str_filter($_REQUEST["name"]);
-	$pwd = str_filter($_REQUEST["pwd"]);
-	$pwd2 = str_filter($_REQUEST["pwd2"]);
-	if($pwd == $pwd2) {
-		$result = $db->get_var("select count(id) from user where name='" . $name . "'");
-		if($result) {
-			output_json(1, "此用户已存在");
-		}
-		
-		$list = array(
-			"name" => $name,
-			"pwd" => $pwd,
-			"add_time" => time()
-		);
-		$sql = SqlText::insert("user", $list);
-		$db->query($sql);
-		
-		output_json(0, "添加成功！");
-	}
-	else {
-		output_json(1, "第二次输入密码不正确");
-	}
-}
 elseif($act == "del") {
-	$id = intval($_REQUEST["id"]);
-	if($id == $_SESSION["curr_user"]["id"]) {
-		output_json(1, "不能删除自己");
+	$id = intval($_GET["id"]);
+	if($id == $_SESSION["admin_id"]) {
+		msg_box("不能删除自己");
 	}
 	else {
-		$where = "id=" . $_REQUEST["id"];
-		$sql = SqlText::delete("user", $where);
+		$table = constant('DB_PREFIX') . "admin";
+		$where = "id=" . $_GET["id"];
+		$sql = SqlText::delete($table, $where);
 		$db->query($sql);
-		output_json(0, "删除成功");
+		msg_box("删除成功", "admin_admin.php");	
 	}
 }
 elseif($act == "pwd") {
-		
-	$smarty->display('admin/admin_admin_pwd.html');
-}
-elseif($act == "pwdsubmit") {
-	$old_pwd = str_filter($_REQUEST["old_pwd"]);
-	$pwd = str_filter($_REQUEST["pwd"]);
-	$pwd2 = str_filter($_REQUEST["pwd2"]);		
-		
-	if($pwd == $pwd2) {
-		$sql = SqlText::func("count", "id", "user", "name='" . $_SESSION["curr_user"]["name"] . "' and pwd='" . $old_pwd . "'");
-		$result = $db->get_var($sql);
-		if($result) {
-			$list = array(
-				"pwd" => $pwd
-			);
-			$db->query(SqlText::update("user", $list, "name='" . $_SESSION["curr_user"]["name"] . "'"));
-			output_json(0, "修改成功");
+	if($_POST) {
+		$old = str_filter($_POST["old"]);
+		$pwd = str_filter($_POST["pwd"]);
+		$pwd2 = str_filter($_POST["pwd2"]);		
+			
+		if($pwd == $pwd2) {		
+			$table = constant('DB_PREFIX') . "admin";
+			$sql = SqlText::func("count", "id", $table, "name='" . $_SESSION["admin"]["name"] . "' and pwd='" . md5($old) . "'");
+			$result = $db->get_var($sql);
+			if($result) {
+				$list["pwd"] = md5($pwd);
+				$_SESSION["admin"]["pwd"] = $list["pwd"];
+				$db->query(SqlText::update($table, $list, "name='" . $_SESSION["admin"]["name"] . "'"));
+				msg_box("修改成功", 'admin_admin.php?act=pwd');
+			}
+			else {
+				msg_box("旧密码错误");
+			}
 		}
 		else {
-			output_json(1, "旧密码错误");
-		}
+			msg_box("第二次输入密码不正确");
+		}	
 	}
-	else {
-		output_json(1, "第二次输入密码不正确");
-	}
+	
+	$smarty->display('admin/admin_admin_pwd.html');
 }
 else
 	exit("错误请求");	

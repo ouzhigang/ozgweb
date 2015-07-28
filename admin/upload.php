@@ -1,15 +1,15 @@
 <?php
 require('init.php');
 
-$act = $_REQUEST["act"] ?  $_REQUEST["act"] : "show";
+$act = $_GET["act"] ?  $_GET["act"] : "show";
 
 if($act == "show") {
 	
 	$smarty->display('admin/upload.html');
 }
 elseif($act == "upload") {
-	$id = $_REQUEST["id"];
-	$name = $_REQUEST["name"];
+	$id = $_GET["id"];
+	$name = $_GET["name"];
 
 	//设置文件后缀名
 	$hzs = array();
